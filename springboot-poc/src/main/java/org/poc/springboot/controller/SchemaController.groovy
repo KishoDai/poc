@@ -5,11 +5,9 @@ import org.poc.springboot.schema.SchemaService
 import org.springframework.context.ApplicationContext
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
 
 import javax.annotation.Resource
-
 /**
  * Created by Administrator on 2017/7/21 0021.
  */
@@ -21,7 +19,6 @@ class SchemaController {
     private ApplicationContext applicationContext
 
     @RequestMapping("/schemas/{queryCondition}")
-    @ResponseBody
     def getSchemas(@PathVariable String schemaType,
                    @PathVariable String queryCondition) {
         if (StringUtils.isBlank(schemaType)) {
@@ -37,7 +34,6 @@ class SchemaController {
     }
 
     @RequestMapping("/versions/{queryCondition}")
-    @ResponseBody
     def getSchemaVersions(@PathVariable String schemaType,
                           @PathVariable String queryCondition) {
         if (StringUtils.isBlank(schemaType)) {
