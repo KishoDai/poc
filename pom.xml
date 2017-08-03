@@ -6,11 +6,14 @@
 
     <groupId>org.poc</groupId>
     <artifactId>poc</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <modules>
         <module>orientdb-poc</module>
         <module>springboot-poc</module>
+        <module>groovy-poc</module>
+        <module>scala-poc</module>
     </modules>
 
     <properties>

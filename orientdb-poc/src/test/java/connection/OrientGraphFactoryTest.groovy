@@ -3,7 +3,7 @@ package connection
 import com.orientechnologies.orient.core.record.impl.ODocument
 import com.orientechnologies.orient.core.sql.OCommandSQL
 import com.tinkerpop.blueprints.impls.orient.OrientGraphFactory
-import org.junit.Test
+import org.testng.annotations.Test
 
 /**
  * Created by Administrator on 2017/7/16 0016.
