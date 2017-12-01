@@ -15,6 +15,7 @@
         <module>groovy-poc</module>
         <module>scala-poc</module>
         <module>orientdbdemo</module>
+        <module>metadata</module>
     </modules>
 
     <properties>
