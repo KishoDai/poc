@@ -46,5 +46,6 @@ create edge HasDatabase extends E
 create edge HasTable extends E
 create edge HasVersion extends E
 create edge HasColumn extends E
+create edge HasIndexColumn extends E
 create edge HasIndex extends E
 create edge HasRelation extends E
