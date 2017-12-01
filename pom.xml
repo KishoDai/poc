@@ -14,6 +14,7 @@
         <module>springboot-poc</module>
         <module>groovy-poc</module>
         <module>scala-poc</module>
+        <module>orientdbdemo</module>
     </modules>
 
     <properties>

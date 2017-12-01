@@ -2,8 +2,10 @@ package connection
 
 import com.orientechnologies.orient.core.record.impl.ODocument
 import com.orientechnologies.orient.core.sql.OCommandSQL
+import com.tinkerpop.blueprints.Graph
+import com.tinkerpop.blueprints.TransactionalGraph
 import com.tinkerpop.blueprints.impls.orient.OrientGraphFactory
-import org.testng.annotations.Test
+import org.junit.Test
 
 /**
  * Created by Administrator on 2017/7/16 0016.
@@ -15,8 +17,12 @@ class OrientGraphFactoryTest {
     void test() {
         OrientGraphFactory factory = new OrientGraphFactory('remote:localhost/test',
                 'admin',
-                'admin');
-        factory.setupPool(1, 10);
+                'admin')
+        factory.setupPool(1, 10)
+
+        TransactionalGraph txGraph = factory.getTx()
+        Graph graph = factory.getNoTx()
+
         List<ODocument> docs = factory.getDatabase().command(new OCommandSQL('select from V where ID=?')).execute(1);
         System.out.println(docs);
     }
