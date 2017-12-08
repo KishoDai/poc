@@ -16,6 +16,7 @@
         <module>scala-poc</module>
         <module>orientdbdemo</module>
         <module>metadata</module>
+        <module>junit-poc</module>
     </modules>
 
     <properties>

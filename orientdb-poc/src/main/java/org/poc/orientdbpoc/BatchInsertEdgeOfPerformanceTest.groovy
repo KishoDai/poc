@@ -33,4 +33,6 @@ builder.append('commit retry 100\n')
 builder.append('return 1')
 
 factory.getDatabase().command(new OCommandScript("sql", builder.toString())).execute()
+ODocument doc = null;
+doc.fe
 println("batch insert edges use time ${System.currentTimeMillis() - start}ms")
