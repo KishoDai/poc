@@ -11,10 +11,10 @@ import org.springframework.context.annotation.Configuration
 @EnableAutoConfiguration
 @EnableDiscoveryClient
 @EnableConfigServer
-class Application {
+class SpringCloudServerApplication {
 
     static void main(args) {
-        SpringApplication.run(Application.class, args)
+        SpringApplication.run(SpringCloudServerApplication.class, args)
     }
 
 }
