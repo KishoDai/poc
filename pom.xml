@@ -17,6 +17,8 @@
         <module>orientdbdemo</module>
         <module>metadata</module>
         <module>junit-poc</module>
+        <module>orientdbpoc3</module>
+        <module>neo4jpoc</module>
     </modules>
 
     <properties>
