@@ -11,6 +11,7 @@ factory.setupPool(1, 1)
 long s0 = System.currentTimeMillis()
 Map<String, String> phoneRidMap = new HashMap<>(20001)
 List<ODocument> phoneDocs = factory.getDatabase().command(new OCommandSQL('select from Phone')).execute()
+factory.getDatabase().query()
 println("query use time ${System.currentTimeMillis() - s0}ms")
 phoneDocs.each {
     phoneRidMap.put(it.field('phone').toString(), it.getIdentity().toString())

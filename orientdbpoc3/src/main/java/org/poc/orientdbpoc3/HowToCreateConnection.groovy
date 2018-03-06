@@ -8,7 +8,8 @@ import com.orientechnologies.orient.core.db.OrientDBConfig
 /**
  * Created by kisho on 2018/2/7.
  */
-ODatabasePool pool = new ODatabasePool(new OrientDB('remote:localhost', OrientDBConfig.defaultConfig()),
+OrientDB orientDB = new OrientDB('remote:localhost', OrientDBConfig.defaultConfig())
+ODatabasePool pool = new ODatabasePool(orientDB,
         'demodb',
         'root',
         'root')

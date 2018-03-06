@@ -33,8 +33,8 @@ class PocEtlService {
 
     void start() {
         long start = System.currentTimeMillis()
-        createVertex()
-//        createEdge()
+//        createVertex()
+        createEdge()
         LOG.info('total used time->{}ms', (System.currentTimeMillis() - start))
     }
 
@@ -75,7 +75,7 @@ class PocEtlService {
         long start0 = System.currentTimeMillis()
         ExecutorService es = Executors.newFixedThreadPool(threadCount)
         List<Future> futures = []
-        threadCount.times {
+        1.times {
             threadNum ->
                 futures.add(es.submit({
                     Session session = driver.session()
@@ -85,7 +85,7 @@ class PocEtlService {
                     long startTime = System.currentTimeMillis()
                     try {
                         while (start <= end) {
-                            tx.run('match (p1:Person{id:$id1})-[:HasFriend]->(p2:Person{id:$id2})', [id1: start, id2: start])
+                            tx.run('match (p1:Person),(p2:Person) where p1.id = $id1 and p2.id = $id2 create (p1)-[:HasFriend]->(p2)', [id1: start, id2: start + 1])
                             if (start % batchSize == 0) {
                                 tx.success()
                                 tx.close()
@@ -109,7 +109,7 @@ class PocEtlService {
         driver = GraphDatabase.driver(neo4jUrl, AuthTokens.basic(neo4jUsername, neo4jPassword))
     }
 
-    static void main(args){
+    static void main(args) {
         println('hi')
     }
 
