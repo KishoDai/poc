@@ -11,16 +11,22 @@ public class Decompiler {
         FileInputStream fis = null;
         try {
             fis = new FileInputStream(classFilePath);
-            byte[] tempBytes = new byte[fis.available()];
-            System.out.println(fis.read(tempBytes));
-            if (tempBytes.length > 0) {
-                int currentDataIndex = 0;
-                System.out.println("魔数(magic):" + getMagicNumber(tempBytes));
-                System.out.println("minor_version:" + getMinorVersion(tempBytes));
-                System.out.println("major_version:" + getMajorVersion(tempBytes));
-                System.out.println("cp_pool_count:" + getCpPoolCount(tempBytes));
-                currentDataIndex += MAGIC_NUMBER_LENGTH;
+            byte[] dataBytes = new byte[fis.available()];
+            System.out.println(fis.read(dataBytes));
+            if (dataBytes.length > 0) {
 
+                System.out.println("魔数(magic):" + getMagicNumber(dataBytes));
+                System.out.println("minor_version:" + getMinorVersion(dataBytes));
+                System.out.println("major_version:" + getMajorVersion(dataBytes));
+                int constantPoolCount = getConstantPoolCount(dataBytes);
+                System.out.println("constant_pool_count:" + constantPoolCount);
+
+                int dataBytesIndex = 10;
+                for (int constantPoolIndex = 1; constantPoolIndex <= constantPoolCount; constantPoolIndex++) {
+                    int tag = (int) dataBytes[dataBytesIndex];
+                    System.out.println("tag:" + tag);
+                    break;
+                }
 
             }
         } finally {
@@ -46,7 +52,8 @@ public class Decompiler {
         return (((int) b[6]) << 8) + b[7];
     }
 
-    private static int getCpPoolCount(byte[] b) {
+    private static int getConstantPoolCount(byte[] b) {
         return (((int) b[8]) << 8) + b[9];
     }
+
 }
