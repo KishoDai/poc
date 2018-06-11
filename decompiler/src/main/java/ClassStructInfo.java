@@ -15,6 +15,12 @@ public class ClassStructInfo {
 
     private ClassInterfacesInfo interfacesInfo;
 
+    private ClassFieldsInfo fieldsInfo;
+
+    private ClassMethodsInfo methodsInfo;
+
+    private ClassAttributesInfo attributesInfo;
+
     public String getMagic() {
         return magic;
     }
@@ -77,6 +83,30 @@ public class ClassStructInfo {
 
     public void setInterfacesInfo(ClassInterfacesInfo interfacesInfo) {
         this.interfacesInfo = interfacesInfo;
+    }
+
+    public ClassFieldsInfo getFieldsInfo() {
+        return fieldsInfo;
+    }
+
+    public void setFieldsInfo(ClassFieldsInfo fieldsInfo) {
+        this.fieldsInfo = fieldsInfo;
+    }
+
+    public ClassMethodsInfo getMethodsInfo() {
+        return methodsInfo;
+    }
+
+    public void setMethodsInfo(ClassMethodsInfo methodsInfo) {
+        this.methodsInfo = methodsInfo;
+    }
+
+    public ClassAttributesInfo getAttributesInfo() {
+        return attributesInfo;
+    }
+
+    public void setAttributesInfo(ClassAttributesInfo attributesInfo) {
+        this.attributesInfo = attributesInfo;
     }
 
     @Override

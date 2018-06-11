@@ -1,6 +1,6 @@
 public class ClassFieldsInfo {
     private int fieldCount;
-    private ClassInterfaceInfo[] interfaceInfos;
+    private ClassFieldInfo[] fieldInfos;
 
     public int getFieldCount() {
         return fieldCount;
@@ -10,11 +10,11 @@ public class ClassFieldsInfo {
         this.fieldCount = fieldCount;
     }
 
-    public ClassInterfaceInfo[] getInterfaceInfos() {
-        return interfaceInfos;
+    public ClassFieldInfo[] getFieldInfos() {
+        return fieldInfos;
     }
 
-    public void setInterfaceInfos(ClassInterfaceInfo[] interfaceInfos) {
-        this.interfaceInfos = interfaceInfos;
+    public void setFieldInfos(ClassFieldInfo[] fieldInfos) {
+        this.fieldInfos = fieldInfos;
     }
 }

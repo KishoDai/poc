@@ -1,29 +1,30 @@
-public class ClassFieldInfo {
+public class ClassMethodInfo {
 
-    private int fieldIndex;
+
+    private int methodIndex;
 
     private boolean accPublic;
     private boolean accPrivate;
     private boolean accProtected;
     private boolean accStatic;
     private boolean accFinal;
-    private boolean accVolatile;
-    private boolean accTransient;
-    private boolean accSynthetic;
-    private boolean accEnum;
+    private boolean accSynchronized;
+    private boolean accNative;
+    private boolean accAbstract;
+    private boolean accStrict;
 
     private int nameIndex;
     private int descriptorIndex;
 
-    private ClassAttributesInfo attributeInfos;
+    private ClassAttributesInfo attributesInfo;
 
 
-    public int getFieldIndex() {
-        return fieldIndex;
+    public int getMethodIndex() {
+        return methodIndex;
     }
 
-    public void setFieldIndex(int fieldIndex) {
-        this.fieldIndex = fieldIndex;
+    public void setMethodIndex(int methodIndex) {
+        this.methodIndex = methodIndex;
     }
 
     public boolean isAccPublic() {
@@ -66,36 +67,36 @@ public class ClassFieldInfo {
         this.accFinal = accFinal;
     }
 
-    public boolean isAccVolatile() {
-        return accVolatile;
+    public boolean isAccSynchronized() {
+        return accSynchronized;
     }
 
-    public void setAccVolatile(boolean accVolatile) {
-        this.accVolatile = accVolatile;
+    public void setAccSynchronized(boolean accSynchronized) {
+        this.accSynchronized = accSynchronized;
     }
 
-    public boolean isAccTransient() {
-        return accTransient;
+    public boolean isAccNative() {
+        return accNative;
     }
 
-    public void setAccTransient(boolean accTransient) {
-        this.accTransient = accTransient;
+    public void setAccNative(boolean accNative) {
+        this.accNative = accNative;
     }
 
-    public boolean isAccSynthetic() {
-        return accSynthetic;
+    public boolean isAccAbstract() {
+        return accAbstract;
     }
 
-    public void setAccSynthetic(boolean accSynthetic) {
-        this.accSynthetic = accSynthetic;
+    public void setAccAbstract(boolean accAbstract) {
+        this.accAbstract = accAbstract;
     }
 
-    public boolean isAccEnum() {
-        return accEnum;
+    public boolean isAccStrict() {
+        return accStrict;
     }
 
-    public void setAccEnum(boolean accEnum) {
-        this.accEnum = accEnum;
+    public void setAccStrict(boolean accStrict) {
+        this.accStrict = accStrict;
     }
 
     public int getNameIndex() {
@@ -115,10 +116,10 @@ public class ClassFieldInfo {
     }
 
     public ClassAttributesInfo getAttributesInfo() {
-        return attributeInfos;
+        return attributesInfo;
     }
 
     public void setAttributesInfo(ClassAttributesInfo attributeInfos) {
-        this.attributeInfos = attributeInfos;
+        this.attributesInfo = attributeInfos;
     }
 }

@@ -9,8 +9,8 @@ public class Decompiler {
 
 
     public static void main(String[] args) throws IOException {
-        String classFilePath = "C:\\Users\\daiji\\Documents\\bsgit\\BS-capital-gateway\\capital-gateway-core\\target\\classes\\cn\\bs\\capital\\gateway\\core\\service\\RepaymentImpl.class";
-//        String classFilePath = "C:\\Users\\daiji\\Documents\\git\\poc\\decompiler\\target\\classes\\ClassConstantTagEnum.class";
+//        String classFilePath = "C:\\Users\\daiji\\Documents\\bsgit\\BS-capital-gateway\\capital-gateway-core\\target\\classes\\cn\\bs\\capital\\gateway\\core\\service\\RepaymentImpl.class";
+        String classFilePath = "C:\\Users\\daiji\\Documents\\git\\poc\\decompiler\\target\\classes\\ClassConstantTagEnum.class";
         FileInputStream fis = null;
         ClassStructInfo classStructInfo = new ClassStructInfo();
         try {
@@ -137,13 +137,145 @@ public class Decompiler {
                 classInterfacesInfo.getInterfaceInfos()[i] = classInterfaceInfo;
             }
             classStructInfo.setInterfacesInfo(classInterfacesInfo);
-            dataBytesIndex += 2;
 
-            System.out.println("classStructInfo:" + classStructInfo.toString());
+            //fileds解析 开始
+            ClassFieldsInfo classFieldsInfo = new ClassFieldsInfo();
+            classFieldsInfo.setFieldCount(readShort(dataBytes, dataBytesIndex + 1));
+            dataBytesIndex += 2;
+            classFieldsInfo.setFieldInfos(new ClassFieldInfo[classFieldsInfo.getFieldCount()]);
+            for (int i = 0; i < classFieldsInfo.getFieldCount(); i++) {
+                ClassFieldInfo classFieldInfo = new ClassFieldInfo();
+
+                classFieldInfo.setFieldIndex(i);
+                //access_flags解析
+                short methodAccessFlags = readShort(dataBytes, dataBytesIndex + 1);
+                classFieldInfo.setAccPublic((methodAccessFlags & 1) == 1);
+                classFieldInfo.setAccPrivate((methodAccessFlags & 2) == 2);
+                classFieldInfo.setAccProtected((methodAccessFlags & 4) == 4);
+                classFieldInfo.setAccStatic((methodAccessFlags & 8) == 8);
+                classFieldInfo.setAccFinal((methodAccessFlags & 16) == 16);
+                classFieldInfo.setAccVolatile((methodAccessFlags & 64) == 64);
+                classFieldInfo.setAccTransient((methodAccessFlags & 128) == 128);
+                classFieldInfo.setAccSynthetic((methodAccessFlags & 4096) == 4096);
+                classFieldInfo.setAccEnum((methodAccessFlags & 16384) == 16384);
+                dataBytesIndex += 2;
+                //name_index解析
+                classFieldInfo.setNameIndex(readShort(dataBytes, dataBytesIndex + 1));
+                dataBytesIndex += 2;
+                //descriptor_index解析
+                classFieldInfo.setDescriptorIndex(readShort(dataBytes, dataBytesIndex + 1));
+                dataBytesIndex += 2;
+
+                //attribute解析
+                ClassAttributesInfo classAttributesInfo = new ClassAttributesInfo();
+                //attribute_count解析
+                classAttributesInfo.setAttributeCount(readShort(dataBytes, dataBytesIndex + 1));
+                dataBytesIndex += 2;
+                classAttributesInfo.setAttributeInfos(new ClassAttributeInfo[classAttributesInfo.getAttributeCount()]);
+
+                for (int j = 0; j < classAttributesInfo.getAttributeCount(); j++) {
+                    ClassAttributeInfo classAttributeInfo = new ClassAttributeInfo();
+                    classAttributeInfo.setAttributeIndex(j);
+                    //attribute_name_index
+                    classAttributeInfo.setAttributeNameIndex(readShort(dataBytes, dataBytesIndex + 1));
+                    dataBytesIndex += 2;
+                    //attribute_length u4
+                    classAttributeInfo.setAttributeLength(readInt(dataBytes, dataBytesIndex + 1));
+                    dataBytesIndex += 4;
+                    classAttributeInfo.setInfo(new String(dataBytes, dataBytesIndex + 1, classAttributeInfo.getAttributeLength()));
+                    dataBytesIndex += classAttributeInfo.getAttributeLength();
+                    classAttributesInfo.getAttributeInfos()[j] = classAttributeInfo;
+                }
+                classFieldInfo.setAttributesInfo(classAttributesInfo);
+                classFieldsInfo.getFieldInfos()[i] = classFieldInfo;
+            }
+
+            classStructInfo.setFieldsInfo(classFieldsInfo);
+            //fileds解析 结束
+
+            //methods解析 开始
+            ClassMethodsInfo classMethodsInfo = new ClassMethodsInfo();
+            classMethodsInfo.setMethodsCount(readShort(dataBytes, dataBytesIndex + 1));
+            dataBytesIndex += 2;
+            classMethodsInfo.setMethodInfos(new ClassMethodInfo[classMethodsInfo.getMethodsCount()]);
+            for (int i = 0; i < classMethodsInfo.getMethodsCount(); i++) {
+                ClassMethodInfo classMethodInfo = new ClassMethodInfo();
+
+                classMethodInfo.setMethodIndex(i);
+                //access_flags解析
+                short methodAccessFlags = readShort(dataBytes, dataBytesIndex + 1);
+                classMethodInfo.setAccPublic((methodAccessFlags & 1) == 1);
+                classMethodInfo.setAccPrivate((methodAccessFlags & 2) == 2);
+                classMethodInfo.setAccProtected((methodAccessFlags & 4) == 4);
+                classMethodInfo.setAccStatic((methodAccessFlags & 8) == 8);
+                classMethodInfo.setAccFinal((methodAccessFlags & 16) == 16);
+                classMethodInfo.setAccSynchronized((methodAccessFlags & 32) == 32);
+                classMethodInfo.setAccNative((methodAccessFlags & 128) == 128);
+                classMethodInfo.setAccAbstract((methodAccessFlags & 512) == 512);
+                classMethodInfo.setAccStrict((methodAccessFlags & 2048) == 2048);
+                dataBytesIndex += 2;
+                //name_index解析
+                classMethodInfo.setNameIndex(readShort(dataBytes, dataBytesIndex + 1));
+                dataBytesIndex += 2;
+                //descriptor_index解析
+                classMethodInfo.setDescriptorIndex(readShort(dataBytes, dataBytesIndex + 1));
+                dataBytesIndex += 2;
+
+                //attribute解析
+                ClassAttributesInfo classAttributesInfo = new ClassAttributesInfo();
+                //attribute_count解析
+                classAttributesInfo.setAttributeCount(readShort(dataBytes, dataBytesIndex + 1));
+                dataBytesIndex += 2;
+                classAttributesInfo.setAttributeInfos(new ClassAttributeInfo[classAttributesInfo.getAttributeCount()]);
+
+                for (int j = 0; j < classAttributesInfo.getAttributeCount(); j++) {
+                    ClassAttributeInfo classAttributeInfo = new ClassAttributeInfo();
+                    classAttributeInfo.setAttributeIndex(j);
+                    //attribute_name_index
+                    classAttributeInfo.setAttributeNameIndex(readShort(dataBytes, dataBytesIndex + 1));
+                    dataBytesIndex += 2;
+                    //attribute_length u4
+                    classAttributeInfo.setAttributeLength(readInt(dataBytes, dataBytesIndex + 1));
+                    dataBytesIndex += 4;
+                    classAttributeInfo.setInfo(new String(dataBytes, dataBytesIndex + 1, classAttributeInfo.getAttributeLength()));
+                    dataBytesIndex += classAttributeInfo.getAttributeLength();
+                    classAttributesInfo.getAttributeInfos()[j] = classAttributeInfo;
+                }
+                classMethodInfo.setAttributesInfo(classAttributesInfo);
+                classMethodsInfo.getMethodInfos()[i] = classMethodInfo;
+            }
+            classStructInfo.setMethodsInfo(classMethodsInfo);
+            //methods解析 结束
+
+            //attributes解析 开始
+            ClassAttributesInfo classAttributesInfo = new ClassAttributesInfo();
+            //attribute_count解析
+            classAttributesInfo.setAttributeCount(readShort(dataBytes, dataBytesIndex + 1));
+            dataBytesIndex += 2;
+            classAttributesInfo.setAttributeInfos(new ClassAttributeInfo[classAttributesInfo.getAttributeCount()]);
+
+            for (int j = 0; j < classAttributesInfo.getAttributeCount(); j++) {
+                ClassAttributeInfo classAttributeInfo = new ClassAttributeInfo();
+                classAttributeInfo.setAttributeIndex(j);
+                //attribute_name_index
+                classAttributeInfo.setAttributeNameIndex(readShort(dataBytes, dataBytesIndex + 1));
+                dataBytesIndex += 2;
+                //attribute_length u4
+                classAttributeInfo.setAttributeLength(readInt(dataBytes, dataBytesIndex + 1));
+                dataBytesIndex += 4;
+                classAttributeInfo.setInfo(new String(dataBytes, dataBytesIndex + 1, classAttributeInfo.getAttributeLength()));
+                dataBytesIndex += classAttributeInfo.getAttributeLength();
+                classAttributesInfo.getAttributeInfos()[j] = classAttributeInfo;
+            }
+            classStructInfo.setAttributesInfo(classAttributesInfo);
+            //attributes解析 结束
+
+
         } finally {
             if (fis != null) {
                 fis.close();
             }
+            System.out.println("classStructInfo:" + classStructInfo.toString());
         }
     }
 
