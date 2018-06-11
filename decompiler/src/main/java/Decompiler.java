@@ -2,8 +2,6 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Decompiler {
 
@@ -12,6 +10,7 @@ public class Decompiler {
 
     public static void main(String[] args) throws IOException {
         String classFilePath = "C:\\Users\\daiji\\Documents\\bsgit\\BS-capital-gateway\\capital-gateway-core\\target\\classes\\cn\\bs\\capital\\gateway\\core\\service\\RepaymentImpl.class";
+//        String classFilePath = "C:\\Users\\daiji\\Documents\\git\\poc\\decompiler\\target\\classes\\ClassConstantTagEnum.class";
         FileInputStream fis = null;
         ClassStructInfo classStructInfo = new ClassStructInfo();
         try {
@@ -100,10 +99,46 @@ public class Decompiler {
                 }
             }
             //常量池解析 结束
-            //access_flags访问标志解析
+
+            //access_flags解析
             short accessFlags = readShort(dataBytes, dataBytesIndex + 1);
+            ClassAccessFlags classAccessFlags = new ClassAccessFlags();
+            classAccessFlags.setAccPublic((accessFlags & 1) == 1);
+            classAccessFlags.setAccFinal((accessFlags & 16) == 16);
+            classAccessFlags.setAccSuper((accessFlags & 32) == 32);
+            classAccessFlags.setAccInterface((accessFlags & 512) == 512);
+            classAccessFlags.setAccAbstract((accessFlags & 1024) == 1024);
+            classAccessFlags.setAccSynthetic((accessFlags & 4096) == 4096);
+            classAccessFlags.setAccAnnotation((accessFlags & 8192) == 8192);
+            classAccessFlags.setAccEnum((accessFlags & 16384) == 16384);
+            classStructInfo.setAccessFlags(classAccessFlags);
             dataBytesIndex += 2;
-            System.out.println("accessFlags:" + accessFlags);
+
+            //this_class解析
+            classStructInfo.setThisClassIndex(readShort(dataBytes, dataBytesIndex + 1));
+            dataBytesIndex += 2;
+
+            //super_class解析
+            classStructInfo.setSuperClassIndex(readShort(dataBytes, dataBytesIndex + 1));
+            dataBytesIndex += 2;
+
+            //interfaces解析
+            ClassInterfacesInfo classInterfacesInfo = new ClassInterfacesInfo();
+            classInterfacesInfo.setInterfaceCount(readShort(dataBytes, dataBytesIndex + 1));
+            dataBytesIndex += 2;
+            classInterfacesInfo.setInterfaceInfos(new ClassInterfaceInfo[classInterfacesInfo.getInterfaceCount()]);
+            for (int i = 0; i < classInterfacesInfo.getInterfaceCount(); i++) {
+                ClassInterfaceInfo classInterfaceInfo = new ClassInterfaceInfo();
+                classInterfaceInfo.setInterfaceIndex(i);
+                classInterfaceInfo.setConstantPoolIndex(readShort(dataBytes, dataBytesIndex + 1));
+
+                dataBytesIndex += 2;
+
+                classInterfacesInfo.getInterfaceInfos()[i] = classInterfaceInfo;
+            }
+            classStructInfo.setInterfacesInfo(classInterfacesInfo);
+            dataBytesIndex += 2;
+
             System.out.println("classStructInfo:" + classStructInfo.toString());
         } finally {
             if (fis != null) {
@@ -120,17 +155,6 @@ public class Decompiler {
         return magicNumberBuilder.toString();
     }
 
-    private static int getMinorVersion(byte[] b) {
-        return (((int) b[4]) << 8) + b[5];
-    }
-
-    private static int getMajorVersion(byte[] b) {
-        return (((int) b[6]) << 8) + b[7];
-    }
-
-    private static int getConstantPoolCount(byte[] b) {
-        return (((int) b[8]) << 8) + b[9];
-    }
 
     private static short readShort(byte[] b, int offset) throws IOException {
         return getDataInputStream(b, offset, 2).readShort();

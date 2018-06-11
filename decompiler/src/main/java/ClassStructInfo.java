@@ -8,6 +8,13 @@ public class ClassStructInfo {
     private int majorVersion;
     private ClassConstantPoolInfo constantPoolInfo;
 
+    private ClassAccessFlags accessFlags;
+
+    private int thisClassIndex;
+    private int superClassIndex;
+
+    private ClassInterfacesInfo interfacesInfo;
+
     public String getMagic() {
         return magic;
     }
@@ -38,6 +45,38 @@ public class ClassStructInfo {
 
     public void setConstantPoolInfo(ClassConstantPoolInfo constantPoolInfo) {
         this.constantPoolInfo = constantPoolInfo;
+    }
+
+    public ClassAccessFlags getAccessFlags() {
+        return accessFlags;
+    }
+
+    public void setAccessFlags(ClassAccessFlags accessFlags) {
+        this.accessFlags = accessFlags;
+    }
+
+    public int getThisClassIndex() {
+        return thisClassIndex;
+    }
+
+    public void setThisClassIndex(int thisClassIndex) {
+        this.thisClassIndex = thisClassIndex;
+    }
+
+    public int getSuperClassIndex() {
+        return superClassIndex;
+    }
+
+    public void setSuperClassIndex(int superClassIndex) {
+        this.superClassIndex = superClassIndex;
+    }
+
+    public ClassInterfacesInfo getInterfacesInfo() {
+        return interfacesInfo;
+    }
+
+    public void setInterfacesInfo(ClassInterfacesInfo interfacesInfo) {
+        this.interfacesInfo = interfacesInfo;
     }
 
     @Override
