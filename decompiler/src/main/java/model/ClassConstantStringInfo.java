@@ -1,3 +1,5 @@
+package model;
+
 public class ClassConstantStringInfo extends ClassConstantInfo {
 
     private short stringIndex;

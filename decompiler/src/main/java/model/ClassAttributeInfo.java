@@ -1,3 +1,5 @@
+package model;
+
 public class ClassAttributeInfo {
 
     private int attributeIndex;

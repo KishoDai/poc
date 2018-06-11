@@ -1,3 +1,5 @@
+package model;
+
 public class ClassConstantInfo {
 
     private int constantPoolIndex;

@@ -1,3 +1,5 @@
+package model;
+
 public class ClassConstantReferenceInfo extends ClassConstantInfo {
 
     private short classIndex;

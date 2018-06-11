@@ -1,13 +1,15 @@
+package model;
+
 public class ClassFieldsInfo {
-    private int fieldCount;
+    private int fieldsCount;
     private ClassFieldInfo[] fieldInfos;
 
-    public int getFieldCount() {
-        return fieldCount;
+    public int getFieldsCount() {
+        return fieldsCount;
     }
 
-    public void setFieldCount(int fieldCount) {
-        this.fieldCount = fieldCount;
+    public void setFieldsCount(int fieldsCount) {
+        this.fieldsCount = fieldsCount;
     }
 
     public ClassFieldInfo[] getFieldInfos() {

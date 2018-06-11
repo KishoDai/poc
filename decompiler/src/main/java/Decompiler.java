@@ -1,3 +1,5 @@
+import model.*;
+
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -10,9 +12,9 @@ public class Decompiler {
 
     public static void main(String[] args) throws IOException {
 //        String classFilePath = "C:\\Users\\daiji\\Documents\\bsgit\\BS-capital-gateway\\capital-gateway-core\\target\\classes\\cn\\bs\\capital\\gateway\\core\\service\\RepaymentImpl.class";
-        String classFilePath = "C:\\Users\\daiji\\Documents\\git\\poc\\decompiler\\target\\classes\\ClassConstantTagEnum.class";
+        String classFilePath = "C:\\Users\\daiji\\Documents\\git\\poc\\decompiler\\target\\classes\\model\\ClassConstantTagEnum.class";
         FileInputStream fis = null;
-        ClassStructInfo classStructInfo = new ClassStructInfo();
+        ClassInfo classInfo = new ClassInfo();
         try {
             fis = new FileInputStream(classFilePath);
             byte[] dataBytes = new byte[fis.available()];
@@ -23,16 +25,16 @@ public class Decompiler {
             }
 
             //魔法数字
-            classStructInfo.setMagic(getMagic(dataBytes));
+            classInfo.setMagic(getMagic(dataBytes));
             //最小版本
-            classStructInfo.setMinorVersion(readShort(dataBytes, 4));
+            classInfo.setMinorVersion(readShort(dataBytes, 4));
             //最大版本
-            classStructInfo.setMajorVersion(readShort(dataBytes, 6));
+            classInfo.setMajorVersion(readShort(dataBytes, 6));
             //常量池解析 开始
             ClassConstantPoolInfo classConstantPoolInfo = new ClassConstantPoolInfo();
             classConstantPoolInfo.setConstantPoolCount(readShort(dataBytes, 8));
             classConstantPoolInfo.setClassConstantInfos(new ClassConstantInfo[classConstantPoolInfo.getConstantPoolCount()]);
-            classStructInfo.setConstantPoolInfo(classConstantPoolInfo);
+            classInfo.setConstantPoolInfo(classConstantPoolInfo);
 
             int dataBytesIndex = 9;
             for (int constantPoolIndex = 1; constantPoolIndex < classConstantPoolInfo.getConstantPoolCount(); constantPoolIndex++) {
@@ -111,23 +113,23 @@ public class Decompiler {
             classAccessFlags.setAccSynthetic((accessFlags & 4096) == 4096);
             classAccessFlags.setAccAnnotation((accessFlags & 8192) == 8192);
             classAccessFlags.setAccEnum((accessFlags & 16384) == 16384);
-            classStructInfo.setAccessFlags(classAccessFlags);
+            classInfo.setAccessFlags(classAccessFlags);
             dataBytesIndex += 2;
 
             //this_class解析
-            classStructInfo.setThisClassIndex(readShort(dataBytes, dataBytesIndex + 1));
+            classInfo.setThisClassIndex(readShort(dataBytes, dataBytesIndex + 1));
             dataBytesIndex += 2;
 
             //super_class解析
-            classStructInfo.setSuperClassIndex(readShort(dataBytes, dataBytesIndex + 1));
+            classInfo.setSuperClassIndex(readShort(dataBytes, dataBytesIndex + 1));
             dataBytesIndex += 2;
 
             //interfaces解析
             ClassInterfacesInfo classInterfacesInfo = new ClassInterfacesInfo();
-            classInterfacesInfo.setInterfaceCount(readShort(dataBytes, dataBytesIndex + 1));
+            classInterfacesInfo.setInterfacesCount(readShort(dataBytes, dataBytesIndex + 1));
             dataBytesIndex += 2;
-            classInterfacesInfo.setInterfaceInfos(new ClassInterfaceInfo[classInterfacesInfo.getInterfaceCount()]);
-            for (int i = 0; i < classInterfacesInfo.getInterfaceCount(); i++) {
+            classInterfacesInfo.setInterfaceInfos(new ClassInterfaceInfo[classInterfacesInfo.getInterfacesCount()]);
+            for (int i = 0; i < classInterfacesInfo.getInterfacesCount(); i++) {
                 ClassInterfaceInfo classInterfaceInfo = new ClassInterfaceInfo();
                 classInterfaceInfo.setInterfaceIndex(i);
                 classInterfaceInfo.setConstantPoolIndex(readShort(dataBytes, dataBytesIndex + 1));
@@ -136,14 +138,14 @@ public class Decompiler {
 
                 classInterfacesInfo.getInterfaceInfos()[i] = classInterfaceInfo;
             }
-            classStructInfo.setInterfacesInfo(classInterfacesInfo);
+            classInfo.setInterfacesInfo(classInterfacesInfo);
 
             //fileds解析 开始
             ClassFieldsInfo classFieldsInfo = new ClassFieldsInfo();
-            classFieldsInfo.setFieldCount(readShort(dataBytes, dataBytesIndex + 1));
+            classFieldsInfo.setFieldsCount(readShort(dataBytes, dataBytesIndex + 1));
             dataBytesIndex += 2;
-            classFieldsInfo.setFieldInfos(new ClassFieldInfo[classFieldsInfo.getFieldCount()]);
-            for (int i = 0; i < classFieldsInfo.getFieldCount(); i++) {
+            classFieldsInfo.setFieldInfos(new ClassFieldInfo[classFieldsInfo.getFieldsCount()]);
+            for (int i = 0; i < classFieldsInfo.getFieldsCount(); i++) {
                 ClassFieldInfo classFieldInfo = new ClassFieldInfo();
 
                 classFieldInfo.setFieldIndex(i);
@@ -190,7 +192,7 @@ public class Decompiler {
                 classFieldsInfo.getFieldInfos()[i] = classFieldInfo;
             }
 
-            classStructInfo.setFieldsInfo(classFieldsInfo);
+            classInfo.setFieldsInfo(classFieldsInfo);
             //fileds解析 结束
 
             //methods解析 开始
@@ -244,7 +246,7 @@ public class Decompiler {
                 classMethodInfo.setAttributesInfo(classAttributesInfo);
                 classMethodsInfo.getMethodInfos()[i] = classMethodInfo;
             }
-            classStructInfo.setMethodsInfo(classMethodsInfo);
+            classInfo.setMethodsInfo(classMethodsInfo);
             //methods解析 结束
 
             //attributes解析 开始
@@ -267,7 +269,7 @@ public class Decompiler {
                 dataBytesIndex += classAttributeInfo.getAttributeLength();
                 classAttributesInfo.getAttributeInfos()[j] = classAttributeInfo;
             }
-            classStructInfo.setAttributesInfo(classAttributesInfo);
+            classInfo.setAttributesInfo(classAttributesInfo);
             //attributes解析 结束
 
 
@@ -275,7 +277,7 @@ public class Decompiler {
             if (fis != null) {
                 fis.close();
             }
-            System.out.println("classStructInfo:" + classStructInfo.toString());
+            System.out.println("classInfo:" + classInfo.toString());
         }
     }
 

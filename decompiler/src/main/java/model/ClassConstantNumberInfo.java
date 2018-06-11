@@ -1,3 +1,5 @@
+package model;
+
 public class ClassConstantNumberInfo extends ClassConstantInfo {
 
     private Number value;

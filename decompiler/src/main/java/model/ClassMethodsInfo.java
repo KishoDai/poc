@@ -1,3 +1,5 @@
+package model;
+
 public class ClassMethodsInfo {
 
     private int methodsCount;

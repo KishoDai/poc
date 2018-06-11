@@ -1,3 +1,5 @@
+package model;
+
 public class ClassAccessFlags {
     private boolean accPublic;//public类型 所有类型
     private boolean accFinal;//final类型 类

@@ -1,3 +1,5 @@
+package model;
+
 public enum ClassConstantTagEnum {
     CONSTANT_Utf8(1, ClassConstantStringInfo.class),//UTF-8编码的unicode字符串
     CONSTANT_Integer(3, ClassConstantNumberInfo.class),//int类型的字面量

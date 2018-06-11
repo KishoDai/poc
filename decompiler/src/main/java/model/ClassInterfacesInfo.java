@@ -1,13 +1,15 @@
+package model;
+
 public class ClassInterfacesInfo {
-    private int interfaceCount;
+    private int interfacesCount;
     private ClassInterfaceInfo[] interfaceInfos;
 
-    public int getInterfaceCount() {
-        return interfaceCount;
+    public int getInterfacesCount() {
+        return interfacesCount;
     }
 
-    public void setInterfaceCount(int interfaceCount) {
-        this.interfaceCount = interfaceCount;
+    public void setInterfacesCount(int interfacesCount) {
+        this.interfacesCount = interfacesCount;
     }
 
     public ClassInterfaceInfo[] getInterfaceInfos() {

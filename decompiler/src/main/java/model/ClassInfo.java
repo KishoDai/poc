@@ -1,7 +1,9 @@
+package model;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class ClassStructInfo {
+public class ClassInfo {
 
     private String magic;
     private int minorVersion;

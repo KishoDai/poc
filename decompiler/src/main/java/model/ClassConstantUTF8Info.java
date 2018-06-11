@@ -1,3 +1,5 @@
+package model;
+
 public class ClassConstantUTF8Info extends ClassConstantInfo {
 
     private String value;
