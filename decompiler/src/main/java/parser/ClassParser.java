@@ -17,7 +17,7 @@ public class ClassParser {
 
     public static void main(String[] args) throws IOException {
 //        String classFilePath = "C:\\Users\\daiji\\Documents\\bsgit\\BS-capital-gateway\\capital-gateway-core\\target\\classes\\cn\\bs\\capital\\gateway\\core\\service\\RepaymentImpl.class";
-        String classFilePath = "C:\\Users\\daiji\\Documents\\git\\poc\\decompiler\\target\\classes\\model\\ClassConstantTagEnum.class";
+        String classFilePath = "C:\\git_code\\kisho\\poc\\decompiler\\target\\classes\\model\\ClassConstantTagEnum.class";
         FileInputStream fis = null;
         ClassInfo classInfo = null;
         try {
@@ -155,6 +155,10 @@ public class ClassParser {
                 classAttributeInfo.setMaxStack(readShort(currentIndex));
                 classAttributeInfo.setMaxLocals(readShort(currentIndex));
                 classAttributeInfo.setCodeLength(readInt(currentIndex));
+                int temp = currentIndex;
+                for (int m = 0; m < classAttributeInfo.getCodeLength(); m++) {
+                    System.out.println(b[++temp]);
+                }
                 classAttributeInfo.setCode(new String(b, currentIndex + 1, classAttributeInfo.getCodeLength()));
                 currentIndex += classAttributeInfo.getCodeLength();
 
@@ -319,7 +323,6 @@ public class ClassParser {
     private void parseMajorVersion() throws IOException {
         classInfo.setMajorVersion(readShort(currentIndex));
     }
-
 
     private short readShort(int offset) throws IOException {
         currentIndex += 2;
