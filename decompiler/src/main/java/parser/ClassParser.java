@@ -68,7 +68,6 @@ public class ClassParser {
         parseMethodsInfo();
         //attributes解析
         classInfo.setAttributesInfo(parseClassAttributesInfo());
-
         return classInfo;
     }
 
@@ -155,6 +154,7 @@ public class ClassParser {
                 classAttributeInfo.setMaxStack(readShort(currentIndex));
                 classAttributeInfo.setMaxLocals(readShort(currentIndex));
                 classAttributeInfo.setCodeLength(readInt(currentIndex));
+//                System.out.println("classAttributeInfo.getCodeLength()=" + classAttributeInfo.getCodeLength());
                 int temp = currentIndex;
                 for (int m = 0; m < classAttributeInfo.getCodeLength(); m++) {
                     System.out.println(b[++temp]);
@@ -284,7 +284,6 @@ public class ClassParser {
             classConstantPoolInfo.getClassConstantInfos()[constantPoolIndex] = new ClassConstantStringInfo(constantPoolIndex,
                     ClassConstantTagEnum.CONSTANT_String,
                     readShort(currentIndex));
-
             //string_index u2
         } else if (tagEnum == ClassConstantTagEnum.CONSTANT_Fieldref
                 || tagEnum == ClassConstantTagEnum.CONSTANT_Methodref

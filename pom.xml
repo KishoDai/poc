@@ -21,6 +21,7 @@
         <module>neo4jpoc</module>
         <module>poc-doc</module>
         <module>decompiler</module>
+        <module>jvm-poc</module>
     </modules>
 
     <properties>
