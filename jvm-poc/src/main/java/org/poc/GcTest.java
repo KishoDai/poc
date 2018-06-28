@@ -4,7 +4,8 @@ public class GcTest {
 
     private static final int _1MB = 1024 * 1024;
 
-    //-verbose:gc -Xmx20M -Xms20M -Xmn10m -XX:+PrintGCDetails -XX:SurvivorRatio=8
+    //-verbose:gc -Xmx20M -Xms20M -Xmn10M -XX:+PrintGCDetails -XX:SurvivorRatio=8
+    //Yong(10M): eden : 8192KB, Survivor: to space(1024), from space(1024)
     public static void main(String[] args) {
         byte[] allocation1 = new byte[2 * _1MB];
         byte[] allocation2 = new byte[2 * _1MB];
