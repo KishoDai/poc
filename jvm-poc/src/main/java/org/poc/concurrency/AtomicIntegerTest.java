@@ -14,6 +14,7 @@ public class AtomicIntegerTest {
     private static AtomicInteger ai = new AtomicInteger(0);
 
     public static void main(String[] args) {
+
         ai.getAndIncrement();
         System.out.println(ai.get());
 
