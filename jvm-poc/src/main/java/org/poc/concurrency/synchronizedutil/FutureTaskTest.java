@@ -1,4 +1,4 @@
-package org.poc.concurrency;
+package org.poc.concurrency.synchronizedutil;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
