@@ -2,12 +2,14 @@ package org.poc.jvm;
 
 import org.junit.Test;
 
+import java.util.Date;
+
 public class IntegerTest {
 
 
     @Test
     public void test() {
-        System.out.println(Integer.valueOf(-128) == Integer.valueOf(-128));
+//        System.out.println(Integer.valueOf(-128) == Integer.valueOf(-128));
         System.out.println(Integer.valueOf(127) == Integer.valueOf(127));
         System.out.println(Integer.valueOf(128) == Integer.valueOf(128));
         System.out.println(Integer.valueOf(128).intValue() == Integer.valueOf(128).intValue());
@@ -18,5 +20,7 @@ public class IntegerTest {
         Integer m = 127;
         Integer n = 127;
         System.out.println(m == n);
+        long l = 1531818346268L;
+        System.out.println(new Date(l));
     }
 }

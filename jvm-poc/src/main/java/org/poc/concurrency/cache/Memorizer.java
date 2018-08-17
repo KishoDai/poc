@@ -15,6 +15,7 @@ public class Memorizer<A, V> implements Computable<A, V> {
 
     @Override
     public V compute(final A arg) throws InterruptedException {
+//        Thread.interrupted();
         while (true) {
             Future<V> f = cache.get(arg);
             if (f == null) {
@@ -30,6 +31,8 @@ public class Memorizer<A, V> implements Computable<A, V> {
                     ft.run();
                 }
             }
+
+
 
             try {
                 return f.get();

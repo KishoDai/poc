@@ -5,7 +5,7 @@ import com.tinkerpop.blueprints.impls.orient.OrientGraphFactory
 
 OrientGraphFactory factory = new OrientGraphFactory('remote:localhost/bill99', 'root', 'admin')
 factory.setupPool(1, 1)
-
+factory.setConnectionStrategy()
 
 10.times {
     StringBuilder builder = new StringBuilder()
