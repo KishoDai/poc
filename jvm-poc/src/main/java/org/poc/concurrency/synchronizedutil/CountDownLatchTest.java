@@ -15,8 +15,8 @@ public class CountDownLatchTest {
     }
 
     public void timeTasks(int nThreads, final Runnable task) throws InterruptedException {
-        CountDownLatch startGate = new CountDownLatch(1);
-        CountDownLatch endGate = new CountDownLatch(nThreads);
+        final CountDownLatch startGate = new CountDownLatch(1);
+        final CountDownLatch endGate = new CountDownLatch(nThreads);
         for (int i = 0; i < nThreads; i++) {
             new Thread() {
                 @Override

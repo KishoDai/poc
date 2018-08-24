@@ -22,6 +22,8 @@
         <module>poc-doc</module>
         <module>decompiler</module>
         <module>jvm-poc</module>
+        <module>designpattern</module>
+        <module>io-poc</module>
     </modules>
 
     <properties>
