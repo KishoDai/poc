@@ -1,4 +1,4 @@
-package org.poc.designpattern.singleton;
+package org.poc.designpattern.inter.singleton;
 
 //懒汉式：双重检查锁
 public class Singleton2 {
