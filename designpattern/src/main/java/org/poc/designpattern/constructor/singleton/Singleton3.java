@@ -1,4 +1,4 @@
-package org.poc.designpattern.inter.singleton;
+package org.poc.designpattern.constructor.singleton;
 
 //懒汉式：延迟加载类占位模式
 public class Singleton3 {

@@ -1,4 +1,4 @@
-package org.poc.designpattern.inter.singleton;
+package org.poc.designpattern.constructor.singleton;
 
 //饿汉式
 public class Singleton1 {
