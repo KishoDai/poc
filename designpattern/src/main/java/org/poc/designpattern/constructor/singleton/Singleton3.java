@@ -6,7 +6,6 @@ public class Singleton3 {
     private static Singleton3 INSTANCE = null;
 
     private Singleton3() {
-        throw new Error("Can not invoke constructor!");
     }
 
     private static class ResourceHolder {

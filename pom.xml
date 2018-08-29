@@ -24,6 +24,7 @@
         <module>jvm-poc</module>
         <module>designpattern</module>
         <module>io-poc</module>
+        <module>netty-poc</module>
     </modules>
 
     <properties>
