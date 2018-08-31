@@ -8,5 +8,6 @@ public class Test {
 //            ;
 //        }
 //        System.out.println("instance=" + instance);
+        System.out.println(Runtime.getRuntime().availableProcessors());
     }
 }

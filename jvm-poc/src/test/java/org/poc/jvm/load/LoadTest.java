@@ -1,7 +1,5 @@
 package org.poc.jvm.load;
 
-import com.sun.imageio.plugins.common.LZWCompressor;
-
 public class LoadTest {
     private LoadTest() {
     }

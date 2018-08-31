@@ -25,6 +25,7 @@
         <module>designpattern</module>
         <module>io-poc</module>
         <module>netty-poc</module>
+        <module>redis-poc</module>
     </modules>
 
     <properties>
