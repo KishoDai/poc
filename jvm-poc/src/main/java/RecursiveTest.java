@@ -8,6 +8,6 @@ public class RecursiveTest {
     }
 
     public static long recursive(int i) {
-        return i == 0 ? 1 :  i * recursive(i - 1);
+        return i == 0 ? 1 : i * recursive(i - 1);
     }
 }

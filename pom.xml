@@ -26,6 +26,7 @@
         <module>io-poc</module>
         <module>netty-poc</module>
         <module>redis-poc</module>
+        <module>alibaba-development-specification-study</module>
     </modules>
 
     <properties>
