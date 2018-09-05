@@ -1,5 +1,6 @@
 package org.poc.alibaba.development.specification.study;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.concurrent.Future;
 
 public class SpecTest1_5_4 {
 
-    @Test(expected = ClassCastException.class)
+    @Test
     public void testToArray() {
         List<String> list = new ArrayList<String>(2);
         list.add("guan");
@@ -21,7 +22,7 @@ public class SpecTest1_5_4 {
         String[] array1 = new String[list.size()];
         list.toArray(array1);
 
-        System.out.println("array1[0] = " + array1[0]);
-        String[] array2 = (String[]) list.toArray();
+        Assert.assertFalse(list.toArray() instanceof String[]);
+        Assert.assertTrue(list.toArray() instanceof Object[]);
     }
 }

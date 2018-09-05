@@ -3,12 +3,13 @@ package org.poc.alibaba.development.specification.study;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
 
 public class SpecTest1_5_7 {
 
-    @Test
+    @Test(expected = ConcurrentModificationException.class)
     public void testRemoveItemFromList() {
         List<String> list = new ArrayList();
         list.add("1");
@@ -17,7 +18,7 @@ public class SpecTest1_5_7 {
         while (iterator.hasNext()) {
             String item = iterator.next();
             if ("2".equals(item)) {
-                iterator.remove();
+                list.remove(item);
             }
         }
     }
@@ -30,7 +31,7 @@ public class SpecTest1_5_7 {
         list.add("3");
         list.add("4");
         for (String item : list) {
-            if ("4".equals(item)) {
+            if ("3".equals(item)) {
                 list.remove(item);
             }
             System.out.println(item);

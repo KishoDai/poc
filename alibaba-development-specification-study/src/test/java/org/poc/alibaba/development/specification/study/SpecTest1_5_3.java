@@ -21,24 +21,14 @@ public class SpecTest1_5_3 {
 
         final List<String> subList = list.subList(1, 2);
 
-        final ExecutorService executor = Executors.newCachedThreadPool();
-        int threadCount = 50;
-        List<Future> futures = new ArrayList<Future>(threadCount);
-        for (int i = 0; i < threadCount; i++) {
-            futures.add(executor.submit(new Runnable() {
-                public void run() {
-                    subList.add("4");
-                }
-            }));
+        list.add("4");
+
+
+        System.out.println("list = " + list);
+
+        for (int i = 0; i < subList.size(); i++) {
+            System.out.println(subList.get(i));
         }
-        for (Future future : futures) {
-            try {
-                future.get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                throw (ConcurrentModificationException) e.getCause();
-            }
-        }
+        subList.add("5");
     }
 }
