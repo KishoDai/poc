@@ -23,6 +23,7 @@ public class AtomicIntegerTest {
         ExecutorService es = Executors.newCachedThreadPool();
         for (int i = 0; i < THREADS_COUNT; i++) {
             futures.add(es.submit(new Runnable() {
+                @Override
                 public void run() {
                     for (int j = 0; j < 10000; j++) {
                         ai.incrementAndGet();

@@ -21,6 +21,5 @@ public class IntegerTest {
         Integer n = 127;
         System.out.println(m == n);
         long l = 1531818346268L;
-        System.out.println(new Date(l));
     }
 }
