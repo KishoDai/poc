@@ -15,6 +15,7 @@ public class ClassParser {
     //解析后的class数据结构
     private ClassInfo classInfo;
 
+    //-XX:+UnlockDiagnosticVMOptions -XX:+PrintInlining
     public static void main(String[] args) throws IOException {
 //        String classFilePath = "C:\\Users\\daiji\\Documents\\bsgit\\BS-capital-gateway\\capital-gateway-core\\target\\classes\\cn\\bs\\capital\\gateway\\core\\service\\RepaymentImpl.class";
         String classFilePath = "C:\\git_code\\kisho\\poc\\decompiler\\target\\classes\\model\\ClassConstantTagEnum.class";
