@@ -8,7 +8,7 @@ public class StackOverflowErrorTest {
 
     /**
      * JVM参数：
-     * -Xss1m -XX:+PrintHeapAtGC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=C:\git_code\kisho\poc\jvm-poc\src\heap_dump_path
+     * -Xss10m -XX:+PrintHeapAtGC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=C:\git_code\kisho\poc\jvm-poc\src\heap_dump_path
      */
     @Test(expected = StackOverflowError.class)
     public void testStackUseUp() {

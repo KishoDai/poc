@@ -6,6 +6,7 @@ import sun.nio.ch.DirectBuffer;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 public class OutOfMemoryErrorTest {
 
@@ -58,7 +59,7 @@ public class OutOfMemoryErrorTest {
 
     /**
      * JVM参数：
-     * -Xms10m -Xmx10m  -XX:+PrintHeapAtGC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=C:\git_code\kisho\poc\jvm-poc\src\heap_dump_path
+     * -Xss5m -Xms10m -Xmx10m  -XX:+PrintHeapAtGC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=C:\git_code\kisho\poc\jvm-poc\src\heap_dump_path
      */
     @Test(expected = OutOfMemoryError.class)
     public void testStackUseUp() {
@@ -68,6 +69,28 @@ public class OutOfMemoryErrorTest {
             error.printStackTrace();
             throw error;
         }
+    }
+
+    /**
+     * 该案例证明默认情况下，方法中创建的对象还是在堆上分配的。
+     *
+     * JVM参数：
+     * -Xss100m -Xms10m -Xmx10m  -XX:+PrintHeapAtGC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=C:\git_code\kisho\poc\jvm-poc\src\heap_dump_path
+     */
+    @Test(expected = OutOfMemoryError.class)
+    public void testStackUseUp2() throws InterruptedException {
+        int threadCount = 10;
+        final CountDownLatch countDownLatch = new CountDownLatch(threadCount);
+        for (int i = 0; i < threadCount; i++) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    testStack2(1);
+                    countDownLatch.countDown();
+                }
+            }).start();
+        }
+        countDownLatch.await();
     }
 
     /**
@@ -87,8 +110,14 @@ public class OutOfMemoryErrorTest {
     }
 
     private long testStack(int i) {
-        int[] iArr = new int[1000000];
+        byte[] bArr = new byte[6 * 1024];
         return testStack(i);
+    }
+
+
+    private long testStack2(int i) {
+        byte[] bArr = new byte[2 * 1024];
+        return 1;
     }
 
 }
