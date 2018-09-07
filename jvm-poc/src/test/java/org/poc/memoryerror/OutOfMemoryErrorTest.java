@@ -1,7 +1,9 @@
 package org.poc.memoryerror;
 
 import org.junit.Test;
+import sun.nio.ch.DirectBuffer;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,9 +57,6 @@ public class OutOfMemoryErrorTest {
     }
 
     /**
-     * 使用String.intern()创建太多无法回收的对象。
-     * 在JDK1.8并不会导致内存溢出，因为1.8把intern（）后的对象存放在heap中，而不是方法区中
-     * <p>
      * JVM参数：
      * -Xms10m -Xmx10m  -XX:+PrintHeapAtGC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=C:\git_code\kisho\poc\jvm-poc\src\heap_dump_path
      */
@@ -71,6 +70,21 @@ public class OutOfMemoryErrorTest {
         }
     }
 
+    /**
+     * direct memory用完在抛出OutOfMemoryError之前会执行一次GC
+     * <p>
+     * JVM参数：
+     * -XX:MaxDirectMemorySize=10m -XX:+PrintHeapAtGC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=C:\git_code\kisho\poc\jvm-poc\src\heap_dump_path
+     */
+    @Test(expected = OutOfMemoryError.class)
+    public void testOomWithDirectMemoryUseUp() {
+        try {
+            ByteBuffer byteBuffer = ByteBuffer.allocateDirect(15 * 1024 * 1024);
+        } catch (OutOfMemoryError error) {
+            error.printStackTrace();
+            throw error;
+        }
+    }
 
     private long testStack(int i) {
         int[] iArr = new int[1000000];
