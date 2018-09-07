@@ -1,4 +1,4 @@
-package org.poc.example;
+package org.poc.classinit;
 
 public class Test {
     //-verbose:class -XX:+TraceClassLoading -Xlog:class+load=info

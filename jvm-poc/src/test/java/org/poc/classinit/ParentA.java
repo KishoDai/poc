@@ -1,4 +1,4 @@
-package org.poc.example;
+package org.poc.classinit;
 
 public class ParentA {
 

@@ -6,7 +6,8 @@ import java.util.concurrent.CountDownLatch;
 
 public class DeadLockTest {
 
-    @Test(timeout = 5000L)
+    @Test
+            //(timeout = 5000L)
     public void testDeadLockOnObject() throws InterruptedException {
         int threadCount = Runtime.getRuntime().availableProcessors();
         int opCountPerThread = 20;
