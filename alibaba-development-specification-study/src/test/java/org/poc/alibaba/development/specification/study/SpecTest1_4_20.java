@@ -18,7 +18,6 @@ public class SpecTest1_4_20 {
         stu.setFriend(new Student());
 
         Student cloneStu = (Student) stu.clone();
-        cloneStu.setName("张三");
         cloneStu.getHobbies().add("看书");
 
         Assert.assertTrue(stu != cloneStu);

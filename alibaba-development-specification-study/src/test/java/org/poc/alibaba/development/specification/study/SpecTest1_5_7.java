@@ -2,14 +2,11 @@ package org.poc.alibaba.development.specification.study;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class SpecTest1_5_7 {
 
-    @Test(expected = ConcurrentModificationException.class)
+    @Test
     public void testRemoveItemFromList() {
         List<String> list = new ArrayList();
         list.add("1");
@@ -17,7 +14,8 @@ public class SpecTest1_5_7 {
         Iterator<String> iterator = list.iterator();
         while (iterator.hasNext()) {
             String item = iterator.next();
-            if ("2".equals(item)) {
+            System.out.println(item);
+            if ("1".equals(item)) {
                 list.remove(item);
             }
         }

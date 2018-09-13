@@ -26,7 +26,7 @@ public class OutOfMemoryErrorTest {
      * 创建太多无法回收的对象。
      * <p>
      * JVM参数：
-     * -Xms10m -Xmx10m  -XX:+PrintHeapAtGC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=C:\git_code\kisho\poc\jvm-poc\src\heap_dump_path
+     * -Xms10m -Xmx10m -XX:+PrintGCApplicationStoppedTime -XX:+PrintHeapAtGC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=C:\git_code\kisho\poc\jvm-poc\src\heap_dump_path
      */
     @Test(expected = OutOfMemoryError.class)
     public void testHeapUseUpWithManyObject() {
@@ -73,7 +73,7 @@ public class OutOfMemoryErrorTest {
 
     /**
      * 该案例证明默认情况下，方法中创建的对象还是在堆上分配的。
-     *
+     * <p>
      * JVM参数：
      * -Xss100m -Xms10m -Xmx10m  -XX:+PrintHeapAtGC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=C:\git_code\kisho\poc\jvm-poc\src\heap_dump_path
      */
@@ -94,7 +94,8 @@ public class OutOfMemoryErrorTest {
     }
 
     /**
-     * direct memory用完在抛出OutOfMemoryError之前会执行一次GC
+     * direct memory用完在抛出OutOfMemoryError之前会执行一次GC.
+     * 但不会入文件。
      * <p>
      * JVM参数：
      * -XX:MaxDirectMemorySize=10m -XX:+PrintHeapAtGC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=C:\git_code\kisho\poc\jvm-poc\src\heap_dump_path

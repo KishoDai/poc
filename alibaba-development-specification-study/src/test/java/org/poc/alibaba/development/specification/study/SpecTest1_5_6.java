@@ -9,12 +9,10 @@ public class SpecTest1_5_6 {
 
     @Test
     public void testExtends() {
-        List<? extends Self> selfList = new ArrayList() {
-            {
-                add("1");
-                add("2");
-            }
-        };
+        List list = new ArrayList();
+        list.add("1");
+        list.add("2");
+        List<? extends Self> selfList = list;
 //        selfList.add(new Self());
 //        selfList.add(new Son());
         selfList.add(null);
@@ -48,14 +46,14 @@ public class SpecTest1_5_6 {
     @Test
     public void testSuper() {
         List<? super Self> selfList = new ArrayList() {
-            {
-                add("1");
-                add("2");
-            }
+                {
+//                    add("1");
+//                    add("2");
+                }
         };
         selfList.add(new Self());
         selfList.add(new Son());
-        selfList.add(null);
+//        selfList.add(null);
         for (Object obj : selfList) {
             System.out.println(obj);
         }

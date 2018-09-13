@@ -19,4 +19,13 @@ public class SpecTest1_4_7 {
         Integer n = 127;
         Assert.assertTrue(m == n);
     }
+
+    public void test2() {
+//        String str = "start";
+        StringBuilder sb = new StringBuilder();
+        sb.append("1").append("2").append("3");
+        for (int i = 0; i < 100; i++) {
+            sb.append("hello");
+        }
+    }
 }
