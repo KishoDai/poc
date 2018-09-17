@@ -5,7 +5,7 @@ import java.util.concurrent.*;
 
 public class Memorizer<A, V> implements Computable<A, V> {
 
-    private Map<A, Future<V>> cache = new ConcurrentHashMap<>();
+    private Map<A, Future<V>> cache = new ConcurrentHashMap();
 
     private Computable<A, V> computable;
 
@@ -19,17 +19,17 @@ public class Memorizer<A, V> implements Computable<A, V> {
         while (true) {
             Future<V> f = cache.get(arg);
             if (f == null) {
-                FutureTask<V> ft = new FutureTask<>(new Callable<V>() {
+                FutureTask<V> ft = new FutureTask(new Callable<V>() {
                     @Override
                     public V call() throws Exception {
                         return computable.compute(arg);
                     }
                 });
-                f = cache.putIfAbsent(arg, ft);
-                if (f == null) {
-                    f = ft;
-                    ft.run();
-                }
+//                f = cache.putIfAbsent(arg, ft);
+//                if (f == null) {
+//                    f = ft;
+//                    ft.run();
+//                }
             }
 
 

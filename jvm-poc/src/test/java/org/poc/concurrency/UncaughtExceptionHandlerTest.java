@@ -37,7 +37,7 @@ public class UncaughtExceptionHandlerTest {
             }
         }
 
-        MyThreadPoolExecutor mtpe = new MyThreadPoolExecutor(1, 1, 100, TimeUnit.SECONDS, new ArrayBlockingQueue<>(10),
+        MyThreadPoolExecutor mtpe = new MyThreadPoolExecutor(1, 1, 100, TimeUnit.SECONDS, new ArrayBlockingQueue(10),
                 new RejectedExecutionHandler() {
                     @Override
                     public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
@@ -76,7 +76,7 @@ public class UncaughtExceptionHandlerTest {
 
         }
 
-        MyThreadPoolExecutor mtpe = new MyThreadPoolExecutor(1, 1, 100, TimeUnit.SECONDS, new ArrayBlockingQueue<>(10),
+        MyThreadPoolExecutor mtpe = new MyThreadPoolExecutor(1, 1, 100, TimeUnit.SECONDS, new ArrayBlockingQueue(10),
                 new RejectedExecutionHandler() {
                     @Override
                     public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {

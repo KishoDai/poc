@@ -31,7 +31,7 @@ public class OutOfMemoryErrorTest {
     @Test(expected = OutOfMemoryError.class)
     public void testHeapUseUpWithManyObject() {
         int size = 1000000;
-        List<Object> objList = new ArrayList<>(size);
+        List<Object> objList = new ArrayList(size);
         for (int i = 0; i < size; i++) {
             objList.add(new Object());
         }

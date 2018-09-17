@@ -9,6 +9,8 @@ class Singleton1 {
 
     private static Singleton1 INSTANCE = new Singleton1();
 
+    public static Integer I = new Integer(1);
+
     private Singleton1() {
     }
 
@@ -21,6 +23,8 @@ class Singleton1 {
 class Singleton3 {
 
     private static Singleton3 INSTANCE = null;
+
+    public static Integer I = new Integer(1);
 
     private Singleton3() {
     }

@@ -4,7 +4,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class ConcurrentStack<E> {
 
-    private AtomicReference<Node<E>> ar = new AtomicReference<>();
+    private AtomicReference<Node<E>> ar = new AtomicReference();
 
     private class Node<E> {
         E item;
@@ -18,7 +18,7 @@ public class ConcurrentStack<E> {
 
     public void push(E item) {
         Node<E> oldNode;
-        Node<E> newOld = new Node<>(item, null);
+        Node<E> newOld = new Node(item, null);
         do {
             oldNode = ar.get();
             newOld.next = oldNode;

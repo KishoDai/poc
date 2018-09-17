@@ -6,7 +6,7 @@ public class MemorizerTest {
 
     public static void main(String[] args) throws InterruptedException {
         ExpensiveFunction function = new ExpensiveFunction();
-        Memorizer<String, BigInteger> memorizer = new Memorizer<>(function);
+        Memorizer<String, BigInteger> memorizer = new Memorizer(function);
         System.out.println(memorizer.compute("1111"));
     }
 

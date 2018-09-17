@@ -7,7 +7,7 @@ import java.util.List;
 public class UnModifiableCollectionTest {
 
     public static void main(String[] args) {
-        List<String> studentList = new ArrayList<>();
+        List<String> studentList = new ArrayList();
         studentList.add("kisho");
         studentList.add("jack");
         List<String> newStudentList = Collections.unmodifiableList(studentList);

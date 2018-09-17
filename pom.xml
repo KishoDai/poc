@@ -28,6 +28,7 @@
         <module>redis-poc</module>
         <module>alibaba-development-specification-study</module>
         <module>algorithm-poc</module>
+        <module>reference-poc</module>
     </modules>
 
     <properties>
