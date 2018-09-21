@@ -16,7 +16,7 @@ public class ReferenceNullValueTest {
         Integer i = (Integer) obj;
         Assert.assertNull(i);
 
-        // 但是null不属于任意类型
+        // 但是null不属于任何类型
         Assert.assertFalse(null instanceof Object);
         Assert.assertFalse(null instanceof String);
         Assert.assertFalse(null instanceof Integer);

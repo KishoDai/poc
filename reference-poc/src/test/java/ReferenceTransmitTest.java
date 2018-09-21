@@ -17,7 +17,7 @@ public class ReferenceTransmitTest {
     public void testIntTransmit() {
         // int a = 100 反编译后对应如下指令:
         // 0: bipush        100      //将100压入操作数栈
-        // 2: istore_1               //将操作数栈中的数据存入该方法栈桢的局部变量表下标为1的变量中
+        // 2: istore_1               //将操作数栈中的数据存入该方法栈桢的局部变量表下标为1的变量(即变量a)中
         int a = 100;
 
         System.out.println("before testIntTransmit() a = " + a);
@@ -26,7 +26,7 @@ public class ReferenceTransmitTest {
         addOne(a);
 
         // 反编译后对应指令如下：
-        // 48: iload_1              //将局部变量表中下标为1的变量压入操作数栈
+        // 48: iload_1              //将局部变量表中下标为1的变量(即变量a)压入操作数栈
         // 49: invokevirtual #7     // Method java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
         // 52: invokevirtual #8     // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
         // 55: invokevirtual #9     // Method java/io/PrintStream.println:(Ljava/lang/String;)V
@@ -57,8 +57,9 @@ public class ReferenceTransmitTest {
         // 参考addOne方法的相应注释
         addOne(a);
 
-        // 51: aload_1
-        // 52: invokevirtual #16                 // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+        // 51: aload_1                           //将局部变量表中下标为1的变量(即变量a)压入操作数栈
+        // 52: invokevirtual #16                 // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)
+                                                 // Ljava/lang/StringBuilder;
         // 55: invokevirtual #8                  // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
         // 58: invokevirtual #9                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
         System.out.println("after testIntTransmit() a = " + a);
@@ -101,11 +102,13 @@ public class ReferenceTransmitTest {
     @Test
     public void testObjectTransmit() {
         // Foo foo = new Foo() 反编译后对应的指令如下：
-        // 0: new           #24    // class ReferenceTransmitTest$Foo  申请一块Foo实例对象内存,此时所有字段默认为0，并将其引用值压入栈顶
+        // 0: new           #24    // class ReferenceTransmitTest$Foo  申请一块Foo实例对象内存,此时所有字段默认为0，
+                                   // 并将其引用值压入栈顶
         // 3: dup                  // 复制栈顶数据值并将复制值压入栈顶，供后续JVM调用构造方法用
         // 4: aload_0
         // 5: aconst_null
-        // 6: invokespecial #25    // Method ReferenceTransmitTest$Foo."<init>":(LReferenceTransmitTest;LReferenceTransmitTest$1;)V 包括：初始化值、构造语句块、构造方法
+        // 6: invokespecial #25    // Method ReferenceTransmitTest$Foo."<init>":
+        //                   //(LReferenceTransmitTest;LReferenceTransmitTest$1;)V 包括：初始化值、构造语句块、构造方法
         // 9: astore_1             // 将操作数据栈中的数据存储到该方法栈桢的局部变量表下标为1中
         Foo foo = new Foo();
 
@@ -117,6 +120,9 @@ public class ReferenceTransmitTest {
         System.out.println("after testObjectTransmit() foo.a = " + foo.a);
 
         Assert.assertEquals(1, foo.a);
+        //分析：
+        // testObjectTransmit()与addOne()方法访问及修改同一对象内存的值，
+        // 所以在testObjectTransmit()中会看到addOne()方法对属性a值的修改
     }
 
     public void addOne(int a) {
@@ -124,7 +130,7 @@ public class ReferenceTransmitTest {
 
         System.out.println("before addOne() a = " + a);
 
-        //++a 反编译后得到如下指令，它的意思是将该方法栈桢的局部变量表下标为1的值加1
+        //++a 反编译后得到如下指令，它的意思是将该方法栈桢的局部变量表下标为1的值加1，然后写回局部变量表下标为1中
         //25: iinc          1, 1
         ++a;
 
@@ -137,10 +143,12 @@ public class ReferenceTransmitTest {
 
         // ++a 反编译后得到如下指令
         // 25: aload_1             //将该方法栈桢的局部变量表下标为1的值加载到操作数栈是
-        // 26: invokevirtual #18   // Method java/lang/Integer.intValue:()I  //这里实际上做了个拆箱操作，获取a的int值并且压入操作数据栈
+        // 26: invokevirtual #18   // Method java/lang/Integer.intValue:()I
+                                   // 这里实际上做了个拆箱操作，获取a的int值并且压入操作数据栈
         // 29: iconst_1            // 将常量1压入操作数据栈
         // 30: iadd                // 将操作数栈中的两个操作数相加，把结果压入操作数栈
-        // 31: invokestatic  #15   // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;  //对操作数栈中的数据做了一次装箱操作，并且把返回结果(是一个引用地址)压入操作数栈
+        // 31: invokestatic  #15   // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+                                   // 对操作数栈中的数据做了一次装箱操作，并且把返回结果(是一个引用地址)压入操作数栈
         // 34: astore_1            // 将操作数栈中的值存储到该方法栈桢的局部变量表下标为1中
         ++a;
         // 上述指令等同于如下代码
@@ -160,14 +168,14 @@ public class ReferenceTransmitTest {
         System.out.println("before append() a = " + a);
 
         // a += " World!" 反编译后得到如下指令
-        // 25: new           #3    // class java/lang/StringBuilder
+        // 25: new           #3   // class java/lang/StringBuilder
         // 28: dup
-        // 29: invokespecial #4    // Method java/lang/StringBuilder."<init>":()V
+        // 29: invokespecial #4   // Method java/lang/StringBuilder."<init>":()V
         // 32: aload_1
-        // 33: invokevirtual #6    // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-        // 36: ldc           #33   // String  World!
-        // 38: invokevirtual #6    // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-        // 41: invokevirtual #8    // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+        // 33: invokevirtual #6   // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        // 36: ldc           #33  // String  World!
+        // 38: invokevirtual #6   // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        // 41: invokevirtual #8   // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
         // 44: astore_1
         a += " World!";
         // 上述指令等同于如下代码：
@@ -180,7 +188,8 @@ public class ReferenceTransmitTest {
         //分析:
         // 由于String的不可变性(没有提供任何可以修改内部属性的途径)，
         // 编译器对String的连接操作，通过生成StringBuilder来完成的
-        // 最后通过StringBuilder的toString()方法生成了一个新的字符串对象，同时重新修改引用类型a的值指向新的String对象的内存地址。。
+        // 最后通过StringBuilder的toString()方法生成了一个新的字符串对象，
+        // 同时重新修改引用类型a的值指向新的String对象的内存地址。。
     }
 
     public void addOne(Foo foo) {
@@ -188,12 +197,12 @@ public class ReferenceTransmitTest {
         System.out.println("before addOne() foo.a = " + foo.a);
 
         // foo.a++ 反编译后对应的指令如下：
-        // 28: aload_1              // 将该方法栈桢的局部变量表下标为1的值加载到操作数据栈
+        // 28: aload_1              // 将该方法栈桢的局部变量表下标为1(即foo)的值加载到操作数据栈
         // 29: dup                  // 复制栈顶数据值并将复制值压入栈顶
         // 30: getfield      #27    // Field ReferenceTransmitTest$Foo.a:I  获取对象属性a的值并且压入操作数栈
         // 33: iconst_1             // 将常量1压入操作数栈
         // 34: iadd                 // 将操作数栈中数据相加然后把结果压入操作数栈
-        // 35: putfield      #27    // Field ReferenceTransmitTest$Foo.a:I  将操作数栈的值写入对象属性a中
+        // 35: putfield      #27    // Field ReferenceTransmitTest$Foo.a:I  将操作数栈的值写入对象foo的属性a中
         foo.a++;
 
         System.out.println("after addOne() foo.a = " + foo.a);

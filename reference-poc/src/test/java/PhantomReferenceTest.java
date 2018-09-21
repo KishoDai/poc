@@ -16,10 +16,10 @@ public class PhantomReferenceTest {
         }
 
         // 可以解注下这段代码，看下打印日志。下一篇源码剖析解释下这个。
-//        @Override
-//        protected void finalize() {
-//            System.out.println("Student id " + id + " has been finalize()");
-//        }
+        //@Override
+        //protected void finalize() {
+        //    System.out.println("Student id " + id + " has been finalize()");
+        //}
 
         @Override
         public String toString() {
