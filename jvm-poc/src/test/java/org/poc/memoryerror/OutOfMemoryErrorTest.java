@@ -1,7 +1,7 @@
 package org.poc.memoryerror;
 
 import org.junit.Test;
-import sun.nio.ch.DirectBuffer;
+//import sun.nio.ch.DirectBuffer;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
