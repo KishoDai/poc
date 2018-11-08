@@ -29,6 +29,7 @@
         <module>alibaba-development-specification-study</module>
         <module>algorithm-poc</module>
         <module>reference-poc</module>
+        <module>orientdb-demo</module>
     </modules>
 
     <properties>

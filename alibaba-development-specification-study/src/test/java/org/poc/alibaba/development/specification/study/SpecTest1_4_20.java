@@ -2,13 +2,16 @@ package org.poc.alibaba.development.specification.study;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@DisplayName("规范1_4_20")
 public class SpecTest1_4_20 {
 
     @Test
+    @DisplayName("测试复制")
     public void testShallowCopy() throws CloneNotSupportedException {
         Student stu = new Student();
         stu.setName("张三");
