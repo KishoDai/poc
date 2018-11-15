@@ -2,7 +2,6 @@ package cn.xiangme.fintech.capitalmgmt;
 
 import cn.xiangme.fintech.core.Context;
 import cn.xiangme.fintech.core.ResponsibilityHandler;
-import cn.xiangme.fintech.core.SaveResponsibilityHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -19,6 +18,7 @@ public class XiaoyudianApplyPushHandler extends ResponsibilityHandler {
     public Context echo(Context context) {
         //TODO
         LOG.info("echo()......");
+        context.setLevel("4000");
         return context;
     }
 

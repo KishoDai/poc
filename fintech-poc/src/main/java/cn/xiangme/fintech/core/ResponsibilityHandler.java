@@ -26,21 +26,21 @@ public abstract class ResponsibilityHandler implements Serializable {
 
     private ResponsibilityHandler next;
 
-    public final Context handle(Context context) {
+    public Context handle(Context context) {
         if (context == null) {
             return null;
         }
 
         Context newContext = context;
-        if (canHandle(context.getLevels())) {
+        if (canHandle(context.getLevel())) {
             newContext = echo(context);
         }
 
-        if (newContext == null) {
-            return null;
+        if (newContext == null || getNext() == null) {
+            return newContext;
         }
 
-        newContext = executeNext(newContext);
+        newContext = getNext().handle(newContext);
         return newContext;
     }
 
@@ -56,13 +56,6 @@ public abstract class ResponsibilityHandler implements Serializable {
         return handlerMap.getHandler(step, channel);
     }
 
-    protected Context executeNext(Context newContext) {
-        if (getNext() != null) {
-            newContext = getNext().handle(newContext);
-        }
-        return newContext;
-    }
-
     protected List<String> getLevels() {
         return levels;
     }
@@ -71,12 +64,11 @@ public abstract class ResponsibilityHandler implements Serializable {
         return next;
     }
 
-    private boolean canHandle(List<String> currentLevels) {
-        return ((currentLevels == null || currentLevels.isEmpty())
-                && (getLevels() == null || getLevels().isEmpty())
-        ) || (currentLevels != null
+    private boolean canHandle(String level) {
+        return ((level == null || "".equals(level))
+        ) || (level != null
                 && getLevels() != null
-                && getLevels().containsAll(currentLevels));
+                && getLevels().contains(level));
     }
 
 }

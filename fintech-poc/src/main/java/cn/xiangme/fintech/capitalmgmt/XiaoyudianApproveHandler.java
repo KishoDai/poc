@@ -18,6 +18,7 @@ public class XiaoyudianApproveHandler extends ResponsibilityHandler {
     public Context echo(Context context) {
         //TODO
         LOG.info("echo()......");
+        context.setLevel("5000");
         return context;
     }
 

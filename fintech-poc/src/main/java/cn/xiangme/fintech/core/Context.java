@@ -6,17 +6,17 @@ public class Context<T> {
 
     private String channel;
     private String id;
-    private List<String> levels;
+    private String level;
     private T data;
 
     public Context() {
 
     }
 
-    public Context(String channel, String id, List<String> levels, T data) {
+    public Context(String channel, String id, String level, T data) {
         this.channel = channel;
         this.id = id;
-        this.levels = levels;
+        this.level = level;
         this.data = data;
     }
 
@@ -36,12 +36,12 @@ public class Context<T> {
         this.id = id;
     }
 
-    public List<String> getLevels() {
-        return levels;
+    public String getLevel() {
+        return level;
     }
 
-    public void setLevels(List<String> levels) {
-        this.levels = levels;
+    public void setLevel(String level) {
+        this.level = level;
     }
 
     public T getData() {
