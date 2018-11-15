@@ -17,7 +17,7 @@ public class ClassParser {
 
     //-XX:+UnlockDiagnosticVMOptions -XX:+PrintInlining
     public static void main(String[] args) throws IOException {
-//        String classFilePath = "C:\\Users\\daiji\\Documents\\bsgit\\BS-capital-gateway\\capital-gateway-core\\target\\classes\\cn\\bs\\capital\\gateway\\core\\service\\RepaymentImpl.class";
+//        String classFilePath = "C:\\Users\\daiji\\Documents\\bsgit\\BS-capitalmgmt-gateway\\capitalmgmt-gateway-core\\target\\classes\\cn\\bs\\capitalmgmt\\gateway\\core\\service\\RepaymentImpl.class";
         String classFilePath = "C:\\git_code\\kisho\\poc\\decompiler\\target\\classes\\model\\ClassConstantTagEnum.class";
         FileInputStream fis = null;
         ClassInfo classInfo = null;

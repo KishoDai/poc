@@ -30,6 +30,7 @@
         <module>algorithm-poc</module>
         <module>reference-poc</module>
         <module>orientdb-demo</module>
+        <module>fintech-poc</module>
     </modules>
 
     <properties>

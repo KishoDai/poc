@@ -9,10 +9,10 @@ public class ClassLoaderTest2 {
 //        System.out.println(Foo.class.newInstance(
 //    <modelVersion>4.0.0</modelVersion>
 //    <groupId>cn.BS</groupId>
-//    <artifactId>capital-gateway-facade</artifactId>
+//    <artifactId>capitalmgmt-gateway-facade</artifactId>
 //    <packaging>jar</packaging>
 //    <version>1.0-SNAPSHOT</version>
-//    <name>capital-gateway-facade</name>
+//    <name>capitalmgmt-gateway-facade</name>
 //    <url>http://www.BS.cn</url>
 //
 //    <dependencies>
