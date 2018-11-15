@@ -30,7 +30,7 @@
         </layout>
     </appender>
 
-    <root level="${LEVEL}">
+    <root state="${LEVEL}">
         <appender-ref ref="ROLLING"/>
         <appender-ref ref="CONSOLE"/>
     </root>

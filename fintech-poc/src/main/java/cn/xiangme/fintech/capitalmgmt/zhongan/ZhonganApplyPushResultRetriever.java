@@ -1,4 +1,4 @@
-package cn.xiangme.fintech.capitalmgmt;
+package cn.xiangme.fintech.capitalmgmt.zhongan;
 
 import cn.xiangme.fintech.core.capitalmgmt.Context;
 import cn.xiangme.fintech.core.capitalmgmt.ResponsibilityHandler;
@@ -9,14 +9,13 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 
 @Service
-public class MQChannelResponsibilityHandler extends ResponsibilityHandler {
+public class ZhonganApplyPushResultRetriever extends ResponsibilityHandler {
 
-    private static final Logger LOG = LoggerFactory.getLogger(MQChannelResponsibilityHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ZhonganApplyPushResultRetriever.class);
 
     public void consume(String s) {
-        // TODO
         LOG.debug("consume()......");
-        Context context = new Context("023", "123456789", null, s);
+        Context context = new Context("023", "123456789", "4000", s);
         handle(context);
     }
 
@@ -27,7 +26,7 @@ public class MQChannelResponsibilityHandler extends ResponsibilityHandler {
 
     @PostConstruct
     private void init() {
-        setNext(getHandler(HANDLER_SAVE, null));
+        setNext(getHandler(HANDLER_DISPATCH, null));
     }
 
 }

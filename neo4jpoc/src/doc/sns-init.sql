@@ -219,10 +219,10 @@ create index Order.storeId on Order(storeId) NOTUNIQUE
 
 
 create class PhoneAddress
-create property PhoneAddress.id String
+create property PhoneAddress.applyNo String
 create property PhoneAddress.province String
 create property PhoneAddress.city String
-create index PhoneAddress.id on PhoneAddress(id) UNIQUE
+create index PhoneAddress.applyNo on PhoneAddress(applyNo) UNIQUE
 
 
 create property Ip.ipNets EMBEDDEDSET

@@ -81,7 +81,7 @@
                 <version>3.0.0</version>
                 <executions>
                     <execution>
-                        <id>attach-sources</id>
+                        <applyNo>attach-sources</applyNo>
                         <goals>
                             <goal>jar</goal>
                         </goals>
@@ -155,7 +155,7 @@
     <profiles>
         <!-- 开发环境配置 -->
         <profile>
-            <id>dev</id>
+            <applyNo>dev</applyNo>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -172,7 +172,7 @@
         </profile>
 
         <profile>
-            <id>local</id>
+            <applyNo>local</applyNo>
             <properties>
                 <env>local</env>
                 <neo4j_url>bolt://localhost:7687</neo4j_url>

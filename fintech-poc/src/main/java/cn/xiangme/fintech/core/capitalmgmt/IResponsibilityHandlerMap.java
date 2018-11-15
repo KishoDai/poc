@@ -1,4 +1,4 @@
-package cn.xiangme.fintech.core;
+package cn.xiangme.fintech.core.capitalmgmt;
 
 public interface IResponsibilityHandlerMap {
 

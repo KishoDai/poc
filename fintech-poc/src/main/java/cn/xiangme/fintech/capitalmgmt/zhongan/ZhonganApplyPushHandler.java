@@ -1,7 +1,7 @@
-package cn.xiangme.fintech.capitalmgmt;
+package cn.xiangme.fintech.capitalmgmt.zhongan;
 
-import cn.xiangme.fintech.core.Context;
-import cn.xiangme.fintech.core.ResponsibilityHandler;
+import cn.xiangme.fintech.core.capitalmgmt.Context;
+import cn.xiangme.fintech.core.capitalmgmt.ResponsibilityHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -10,21 +10,21 @@ import javax.annotation.PostConstruct;
 import java.util.Arrays;
 
 @Service("handler023_1")
-public class XiaoyudianApplyPushHandler extends ResponsibilityHandler {
+public class ZhonganApplyPushHandler extends ResponsibilityHandler {
 
-    private static final Logger LOG = LoggerFactory.getLogger(XiaoyudianApplyPushHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ZhonganApplyPushHandler.class);
 
     @Override
     public Context echo(Context context) {
         //TODO
         LOG.info("echo()......");
-        context.setLevel("4000");
+        context.setState("4000");
         return context;
     }
 
     @PostConstruct
     private void init() {
-        setLevels(Arrays.asList("3000", "3001"));
+        setStates(Arrays.asList("3000"));
         setNext(getHandler(HANDLER_2, "023"));
     }
 

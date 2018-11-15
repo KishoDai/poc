@@ -1,13 +1,11 @@
 package cn.xiangme.fintech;
 
 import cn.xiangme.fintech.capitalmgmt.MQChannelResponsibilityHandler;
-import cn.xiangme.fintech.core.Context;
-import cn.xiangme.fintech.core.DispatchResponsibilityHandler;
-import cn.xiangme.fintech.core.ResponsibilityHandler;
+import cn.xiangme.fintech.core.capitalmgmt.Context;
+import cn.xiangme.fintech.core.capitalmgmt.DispatchResponsibilityHandler;
+import cn.xiangme.fintech.core.capitalmgmt.ResponsibilityHandler;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.util.Arrays;
 
 public class TestMain {
     public static void main(String[] args) {

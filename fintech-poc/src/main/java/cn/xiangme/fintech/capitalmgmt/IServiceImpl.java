@@ -1,7 +1,7 @@
 package cn.xiangme.fintech.capitalmgmt;
 
-import cn.xiangme.fintech.core.Context;
-import cn.xiangme.fintech.core.IService;
+import cn.xiangme.fintech.core.capitalmgmt.Context;
+import cn.xiangme.fintech.core.capitalmgmt.IService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

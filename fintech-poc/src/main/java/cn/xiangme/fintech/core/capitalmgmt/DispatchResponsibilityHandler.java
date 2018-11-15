@@ -1,4 +1,4 @@
-package cn.xiangme.fintech.core;
+package cn.xiangme.fintech.core.capitalmgmt;
 
 import org.springframework.stereotype.Component;
 
@@ -11,7 +11,7 @@ public class DispatchResponsibilityHandler extends ResponsibilityHandler {
             return null;
         }
         Context newContext = echo(context);
-        ResponsibilityHandler handler = getHandler(HANDLER_1, context.getChannel());
+        ResponsibilityHandler handler = getHandler(HANDLER_1, context.getCapitalNo());
         return handler.handle(newContext);
     }
 

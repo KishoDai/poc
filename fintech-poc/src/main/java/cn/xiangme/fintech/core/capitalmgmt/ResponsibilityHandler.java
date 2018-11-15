@@ -1,4 +1,4 @@
-package cn.xiangme.fintech.core;
+package cn.xiangme.fintech.core.capitalmgmt;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
@@ -32,7 +32,7 @@ public abstract class ResponsibilityHandler implements Serializable {
         }
 
         Context newContext = context;
-        if (canHandle(context.getLevel())) {
+        if (canHandle(context.getState())) {
             newContext = echo(context);
         }
 
@@ -48,7 +48,7 @@ public abstract class ResponsibilityHandler implements Serializable {
         next = handler;
     }
 
-    public void setLevels(List<String> levels) {
+    public void setStates(List<String> levels) {
         this.levels = levels;
     }
 

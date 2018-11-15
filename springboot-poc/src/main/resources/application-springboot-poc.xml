@@ -5,7 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-    <util:map id="globalMap">
+    <util:map applyNo="globalMap">
         <entry key="test" value="kisho dev"/>
     </util:map>
 

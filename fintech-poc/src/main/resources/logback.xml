@@ -30,12 +30,12 @@
         </layout>
     </appender>
 
-    <logger name="org.springframework" level="ERROR" additivity="false">
+    <logger name="org.springframework" state="ERROR" additivity="false">
         <appender-ref ref="ROLLING"/>
     </logger>
 
 
-    <root level="${LEVEL}">
+    <root state="${LEVEL}">
         <appender-ref ref="ROLLING"/>
         <appender-ref ref="CONSOLE"/>
     </root>
