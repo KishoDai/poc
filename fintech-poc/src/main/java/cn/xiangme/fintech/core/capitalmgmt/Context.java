@@ -2,36 +2,41 @@ package cn.xiangme.fintech.core.capitalmgmt;
 
 public class Context<T> {
 
-    private String capitalNo;
-    private String applyNo;
+    private String type;
     private String state;
     private T data;
+
+    private boolean done = false;
 
     public Context() {
 
     }
 
-    public Context(String capitalNo, String applyNo, String state, T data) {
-        this.capitalNo = capitalNo;
-        this.applyNo = applyNo;
+    public Context(String type, T data) {
+        this.type = type;
+        this.data = data;
+    }
+
+    public Context(String type, String state, T data) {
+        this.type = type;
         this.state = state;
         this.data = data;
     }
 
-    public String getCapitalNo() {
-        return capitalNo;
+    public void finish() {
+        done = true;
     }
 
-    public void setCapitalNo(String capitalNo) {
-        this.capitalNo = capitalNo;
+    public boolean done() {
+        return done;
     }
 
-    public String getApplyNo() {
-        return applyNo;
+    public String getType() {
+        return type;
     }
 
-    public void setApplyNo(String applyNo) {
-        this.applyNo = applyNo;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getState() {
@@ -48,5 +53,14 @@ public class Context<T> {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return "Context{" +
+                "type='" + type + '\'' +
+                ", state='" + state + '\'' +
+                ", data=" + data +
+                '}';
     }
 }

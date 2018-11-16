@@ -1,34 +1,84 @@
 package cn.xiangme.fintech;
 
-import cn.xiangme.fintech.capitalmgmt.MQChannelResponsibilityHandler;
+import cn.xiangme.fintech.capitalmgmt.MQApplyApplyChannel;
+import cn.xiangme.fintech.capitalmgmt.MQNotifyChannel;
 import cn.xiangme.fintech.core.capitalmgmt.Context;
-import cn.xiangme.fintech.core.capitalmgmt.DispatchResponsibilityHandler;
-import cn.xiangme.fintech.core.capitalmgmt.ResponsibilityHandler;
+import cn.xiangme.fintech.core.capitalmgmt.DefaultHandlerDispatch;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class TestMain {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
-        MQChannelResponsibilityHandler handler = context.getBean(MQChannelResponsibilityHandler.class);
-        handler.consume("I'm kisho!");
+        MQApplyApplyChannel channel = context.getBean(MQApplyApplyChannel.class);
+        channel.consume("I'm kisho!");
         System.out.println();
         System.out.println();
 
-        ResponsibilityHandler handler2 = context.getBean(DispatchResponsibilityHandler.class);
-        Context context2 = new Context("023", "123456789", "3000", "1111");
-        handler2.handle(context2);
+        MQNotifyChannel channel2 = context.getBean(MQNotifyChannel.class);
+        channel2.consume("I'm kisho!");
         System.out.println();
         System.out.println();
 
-        handler2 = context.getBean(DispatchResponsibilityHandler.class);
-        context2 = new Context("023", "123456789", "4000", "1111");
-        handler2.handle(context2);
+        DefaultHandlerDispatch handler2 = context.getBean(DefaultHandlerDispatch.class);
+        Context context2 = new Context("023", "2000", "1111");
+        handler2.dispatch(context2);
         System.out.println();
         System.out.println();
 
-        handler2 = context.getBean(DispatchResponsibilityHandler.class);
-        context2 = new Context("023", "123456789", "5000", "1111");
-        handler2.handle(context2);
+        handler2 = context.getBean(DefaultHandlerDispatch.class);
+        context2 = new Context("023", "2001", "1111");
+        handler2.dispatch(context2);
+        System.out.println();
+        System.out.println();
+
+        handler2 = context.getBean(DefaultHandlerDispatch.class);
+        context2 = new Context("023", "2002", "1111");
+        handler2.dispatch(context2);
+        System.out.println();
+        System.out.println();
+
+        handler2 = context.getBean(DefaultHandlerDispatch.class);
+        context2 = new Context("023", "2003", "1111");
+        handler2.dispatch(context2);
+        System.out.println();
+        System.out.println();
+
+        handler2 = context.getBean(DefaultHandlerDispatch.class);
+        context2 = new Context("023", "2004", "1111");
+        handler2.dispatch(context2);
+        System.out.println();
+        System.out.println();
+
+        handler2 = context.getBean(DefaultHandlerDispatch.class);
+        context2 = new Context("023", "3000", "1111");
+        handler2.dispatch(context2);
+        System.out.println();
+        System.out.println();
+
+        handler2 = context.getBean(DefaultHandlerDispatch.class);
+        context2 = new Context("023", "3001", "1111");
+        handler2.dispatch(context2);
+        System.out.println();
+        System.out.println();
+
+        handler2 = context.getBean(DefaultHandlerDispatch.class);
+        context2 = new Context("023", "3002", "1111");
+        handler2.dispatch(context2);
+        System.out.println();
+        System.out.println();
+
+        handler2 = context.getBean(DefaultHandlerDispatch.class);
+        context2 = new Context("023", "3003", "1111");
+        handler2.dispatch(context2);
+        System.out.println();
+        System.out.println();
+
+        handler2 = context.getBean(DefaultHandlerDispatch.class);
+        context2 = new Context("023", "3004", "1111");
+        handler2.dispatch(context2);
+        System.out.println();
+        System.out.println();
+
     }
 }

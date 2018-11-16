@@ -1,6 +1,5 @@
 package cn.xiangme.fintech.core.capitalmgmt;
 
-import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.List;
 
@@ -9,66 +8,30 @@ import java.util.List;
  */
 public abstract class ResponsibilityHandler implements Serializable {
 
-    public static final String HANDLER_SAVE = "Save";
-    public static final String HANDLER_DISPATCH = "Dispatch";
-    public static final String HANDLER_1 = "1";
-    public static final String HANDLER_2 = "2";
-    public static final String HANDLER_3 = "3";
-    public static final String HANDLER_4 = "4";
-    public static final String HANDLER_5 = "5";
+    public abstract Context process(Context context);
 
-    @Resource
-    private IResponsibilityHandlerMap handlerMap;
+    public abstract List<String> getStates();
 
-    public abstract Context echo(Context context);
-
-    private List<String> levels;
-
-    private ResponsibilityHandler next;
-
-    public Context handle(Context context) {
+    public final Context handle(Context context) {
         if (context == null) {
             return null;
         }
+        if (context.done()) {
+            return context;
+        }
 
-        Context newContext = context;
         if (canHandle(context.getState())) {
-            newContext = echo(context);
+            context = process(context);
         }
-
-        if (newContext == null || getNext() == null) {
-            return newContext;
-        }
-
-        newContext = getNext().handle(newContext);
-        return newContext;
+        return context;
     }
 
-    public void setNext(ResponsibilityHandler handler) {
-        next = handler;
-    }
-
-    public void setStates(List<String> levels) {
-        this.levels = levels;
-    }
-
-    protected ResponsibilityHandler getHandler(String step, String channel) {
-        return handlerMap.getHandler(step, channel);
-    }
-
-    protected List<String> getLevels() {
-        return levels;
-    }
-
-    protected ResponsibilityHandler getNext() {
-        return next;
-    }
-
-    private boolean canHandle(String level) {
-        return ((level == null || "".equals(level))
-        ) || (level != null
-                && getLevels() != null
-                && getLevels().contains(level));
+    private boolean canHandle(String state) {
+        return ((state == null || "".equals(state))
+                && (getStates() == null || getStates().isEmpty())
+        ) || (state != null
+                && getStates() != null
+                && getStates().contains(state));
     }
 
 }

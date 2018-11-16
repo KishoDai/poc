@@ -4,10 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.List;
 
-@Component("handlerSave")
+@Component(Constants.HANDLER_SAVE)
 public class SaveResponsibilityHandler extends ResponsibilityHandler {
 
     private static final Logger LOG = LoggerFactory.getLogger(SaveResponsibilityHandler.class);
@@ -16,14 +17,15 @@ public class SaveResponsibilityHandler extends ResponsibilityHandler {
     private IService service;
 
     @Override
-    public Context echo(Context context) {
-        LOG.info("echo()......");
+    public Context process(Context context) {
+        LOG.info("process()......");
         return service.save(context);
     }
 
-    @PostConstruct
-    private void init() {
-        setNext(getHandler(HANDLER_DISPATCH, null));
+    @Override
+    public List<String> getStates() {
+        return Arrays.asList(Constants.STATE_SAVE);
     }
+
 
 }

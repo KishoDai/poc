@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <property name="USER_HOME" value="/home/jizhang.dai/logs"/>
-    <property name="LEVEL" value="DEBUG"/>
+    <property name="LEVEL" value="INFO"/>
     <property name="logFileNamePattern" value="${LOG_FILE_NAME}_%d{yyyy-MM-dd}"/>
     <property name="logFileNamePattern2" value="${LOG_FILE_NAME}_%d{yyyy-MM-dd}_%i"/>
     <property name="fileLayoutPattern"
@@ -35,7 +35,7 @@
     </logger>
 
 
-    <root state="${LEVEL}">
+    <root state="INFO">
         <appender-ref ref="ROLLING"/>
         <appender-ref ref="CONSOLE"/>
     </root>
