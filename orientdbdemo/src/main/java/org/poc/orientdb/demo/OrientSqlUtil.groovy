@@ -11,7 +11,7 @@ final class OrientSqlUtil {
 
     private static final OrientGraphFactory FACTORY
     static {
-        FACTORY = new OrientGraphFactory('remote:localhost/test', 'admin', 'admin')
+        FACTORY = new OrientGraphFactory('remote:localhost/test', 'root', 'root')
         FACTORY.setupPool(1, 1) //连接池的最小及最大连接数据
     }
 
