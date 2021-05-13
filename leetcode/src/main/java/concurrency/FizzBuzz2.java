@@ -43,84 +43,74 @@ package concurrency;
 // 👍 49 👎 0
 
 
-import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-public class FizzBuzz {
+class FizzBuzz2 extends FizzBuzz {
     private int n;
+    private static CyclicBarrier barrier = new CyclicBarrier(4);
 
-    private static final int ZERO = 0;
-    private static final int BOMB = -1;
-
-    private SynchronousQueue<Integer> controlQ = new SynchronousQueue();
-    private SynchronousQueue<Integer> fizzQ = new SynchronousQueue();
-    private SynchronousQueue<Integer> buzzQ = new SynchronousQueue();
-    private SynchronousQueue<Integer> fizzbuzzQ = new SynchronousQueue();
-
-    //1, 2, fizz, 4, buzz, fizz, 7, 8, fizz, buzz, 11, fizz, 13, 14
-    public FizzBuzz(int n) {
+    public FizzBuzz2(int n) {
+        super(n);
         this.n = n;
     }
 
     // printFizz.run() outputs "fizz".
     public void fizz(Runnable printFizz) throws InterruptedException {
-        while (true) {
-            Integer v = fizzQ.take();
-            if (v == BOMB) {
-                return;
+        for (int i = 1; i <= n; i++) {
+            if (i % 3 == 0 && i % 5 != 0) {
+                printFizz.run();
             }
-            printFizz.run();
-            controlQ.put(ZERO);
+            try {
+                barrier.await();
+            } catch (BrokenBarrierException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     // printBuzz.run() outputs "buzz".
     public void buzz(Runnable printBuzz) throws InterruptedException {
-        while (true) {
-            Integer v = buzzQ.take();
-            if (v == BOMB) {
-                return;
+        for (int i = 1; i <= n; i++) {
+            if (i % 3 != 0 && i % 5 == 0) {
+                printBuzz.run();
             }
-            printBuzz.run();
-            controlQ.put(ZERO);
+            try {
+                barrier.await();
+            } catch (BrokenBarrierException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     // printFizzBuzz.run() outputs "fizzbuzz".
     public void fizzbuzz(Runnable printFizzBuzz) throws InterruptedException {
-        while (true) {
-            Integer v = fizzbuzzQ.take();
-            if (v == BOMB) {
-                return;
+        for (int i = 1; i <= n; i++) {
+            if (i % 3 == 0 && i % 5 == 0) {
+                printFizzBuzz.run();
             }
-            printFizzBuzz.run();
-            controlQ.put(ZERO);
+            try {
+                barrier.await();
+            } catch (BrokenBarrierException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     // printNumber.accept(x) outputs "x", where x is an integer.
     public void number(IntConsumer printNumber) throws InterruptedException {
         for (int i = 1; i <= n; i++) {
-            boolean divide3 = i % 3 == 0;
-            boolean divide5 = i % 5 == 0;
-            if (!divide3 && !divide5) {
+            if (i % 3 != 0 && i % 5 != 0) {
                 printNumber.accept(i);
-                continue;
-            } else if (divide3 && divide5) {
-                fizzbuzzQ.put(ZERO);
-            } else if (divide3 && !divide5) {
-                fizzQ.put(ZERO);
-            } else if (!divide3 && divide5) {
-                buzzQ.put(ZERO);
             }
-            controlQ.take();
+            try {
+                barrier.await();
+            } catch (BrokenBarrierException e) {
+                e.printStackTrace();
+            }
         }
-        fizzbuzzQ.put(BOMB);
-        fizzQ.put(BOMB);
-        buzzQ.put(BOMB);
     }
-
 }
-
 //leetcode submit region end(Prohibit modification and deletion)
 
