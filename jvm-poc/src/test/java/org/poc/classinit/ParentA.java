@@ -8,6 +8,10 @@ public class ParentA {
         System.out.println("ParentA static {}");
     }
 
+    public int get() {
+        return 0;
+    }
+
     private static int getI() {
         System.out.println("ParentA getI()");
         return 1;

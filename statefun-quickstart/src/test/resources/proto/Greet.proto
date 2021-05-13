@@ -1,0 +1,10 @@
+syntax = "proto3";
+package org.apache.flink.statefun.examples.greeter;
+message GreetRequest {
+  string who = 1;
+}
+
+message GreetResponse {
+  string who = 1;
+  string greeting = 2;
+}

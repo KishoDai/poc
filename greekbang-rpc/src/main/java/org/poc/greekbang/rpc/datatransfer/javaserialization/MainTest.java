@@ -4,10 +4,10 @@ import java.io.*;
 
 public class MainTest {
     public static void main(String[] args) throws Exception {
-        Foo foo = new Foo();
-        foo.setName("kisho");
-        serialize(foo);
-        deserialize();
+//        Foo foo = new Foo();
+//        foo.setName("kisho");
+//        serialize(foo);
+//        deserialize();
     }
 
     private static void serialize(Foo foo) throws Exception {

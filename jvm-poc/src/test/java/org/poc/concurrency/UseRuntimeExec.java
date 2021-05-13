@@ -6,7 +6,7 @@ import java.util.concurrent.CountDownLatch;
 public class UseRuntimeExec {
     public static void main(String[] args) throws InterruptedException {
         int threadCount = 1000;
-        CountDownLatch countDownLatch = new CountDownLatch(threadCount);
+        final CountDownLatch countDownLatch = new CountDownLatch(threadCount);
         do {
             new Thread(new Runnable() {
                 @Override

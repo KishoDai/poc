@@ -8,6 +8,10 @@ public class ChildB extends ParentA {
         System.out.println("ChildB static {}");
     }
 
+    public final int get() {
+        return 0;
+    }
+
     public static int getI() {
         System.out.println("ChildB getI()");
         return 1;

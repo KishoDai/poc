@@ -10,7 +10,7 @@ public class DeadLockTest {
             //(timeout = 5000L)
     public void testDeadLockOnObject() throws InterruptedException {
         int threadCount = Runtime.getRuntime().availableProcessors();
-        int opCountPerThread = 20;
+        final int opCountPerThread = 20;
         final CountDownLatch countDownLatch = new CountDownLatch(threadCount);
         final Foo foo = new Foo();
         for (int i = 0; i < threadCount; i++) {

@@ -1,0 +1,1 @@
+D:\protoc-3.7.1-win64\bin\protoc Greet.proto --java_out=C:\git_code\kisho\poc\statefun-quickstart\src\main\java --proto_path=C:\git_code\kisho\poc\statefun-quickstart\src\test\resources\proto

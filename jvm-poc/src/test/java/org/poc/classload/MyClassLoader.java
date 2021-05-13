@@ -42,9 +42,14 @@ public class MyClassLoader extends ClassLoader {
         return defineClass(name, bArr, 0, bArr.length);
     }
 
+    /**
+     * @param args
+     * @throws ClassNotFoundException
+     */
     public static void main(String[] args) throws ClassNotFoundException {
         MyClassLoader loader = new MyClassLoader("C:\\git_code\\kisho\\poc\\jvm-poc\\target\\test-classes\\", "MyClassLoader");
         Class clz = loader.findClass("org\\poc\\classload\\MyClassLoader.class");
         System.out.println(clz);
+        System.out.println("xdfdfdfdfdsfdfdfsdfsdfsdfffdff");
     }
 }

@@ -32,6 +32,10 @@
         <module>orientdb-demo</module>
         <module>fintech-poc</module>
         <module>greekbang-rpc</module>
+        <module>mybatis-poc</module>
+        <module>statefun-quickstart</module>
+        <module>vim-practice</module>
+        <module>leetcode</module>
     </modules>
 
     <properties>

@@ -39,5 +39,19 @@ public class MinStack {
         return data.get(mins.get(mins.size() - 1));
     }
 
+    public static void main(String[] args) {
+        MinStack stack = new MinStack();
+        stack.push(1);
+        stack.push(1);
+        stack.push(1);
+        System.out.println(stack.getMin());
+        stack.pop();
+        stack.pop();
+        System.out.println(stack.getMin());
+        System.out.println(stack.getMin());
+        System.out.println(stack.getMin());
+
+    }
+
 
 }
