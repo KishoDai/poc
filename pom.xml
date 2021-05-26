@@ -36,6 +36,7 @@
         <module>statefun-quickstart</module>
         <module>vim-practice</module>
         <module>leetcode</module>
+        <module>dubbo-poc</module>
     </modules>
 
     <properties>
