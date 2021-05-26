@@ -18,4 +18,6 @@
 
     <!-- 和本地bean一样实现服务 -->
     <bean id="demoService" class="org.apache.dubbo.demo.provider.DemoServiceImpl"/>
+
+
 </beans>
