@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 public class ProviderLauncher {
     private static Logger LOG = LoggerFactory.getLogger(ProviderLauncher.class);
 
-    public static void launch(String... providerXMLs) {
+    public static void provider(String... providerXMLs) {
         ExecutorService es = Executors.newFixedThreadPool(providerXMLs.length);
         final CountDownLatch countDownLatch = new CountDownLatch(providerXMLs.length);
         for (final String providerXML : providerXMLs) {

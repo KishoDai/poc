@@ -9,14 +9,14 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ConsumerStarter {
-    private static Logger LOG = LoggerFactory.getLogger(ConsumerStarter.class);
+public class ConsumerLauncher {
+    private static Logger LOG = LoggerFactory.getLogger(ConsumerLauncher.class);
 
-    public static void start(String consumerXml) {
-        start(consumerXml, 1);
+    public static void consumer(String consumerXml) {
+        consumer(consumerXml, 1);
     }
 
-    public static void start(String consumerXml, int count) {
+    public static void consumer(String consumerXml, int count) {
         ExecutorService es = Executors.newFixedThreadPool(count);
         final CountDownLatch countDownLatch = new CountDownLatch(count);
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(consumerXml);

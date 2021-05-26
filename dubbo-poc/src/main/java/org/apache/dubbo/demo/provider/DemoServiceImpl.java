@@ -11,8 +11,7 @@ public class DemoServiceImpl implements DemoService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        String result = "server : Hello " + name;
-        log.info(result);
-        return result;
+        log.info("server : Hello " + name);
+        return "Hello " + name;
     }
 }
