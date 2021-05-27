@@ -17,7 +17,7 @@
 
     <properties>
         <argLine>-XX:MaxDirectMemorySize=512g</argLine>
-        <orientdb-version>2.2.22</orientdb-version>
+        <orientdb-version>3.0.30</orientdb-version>
     </properties>
 
     <dependencies>

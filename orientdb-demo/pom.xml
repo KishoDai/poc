@@ -15,17 +15,17 @@
         <dependency>
             <groupId>com.orientechnologies</groupId>
             <artifactId>orientdb-graphdb</artifactId>
-            <version>3.0.4</version>
+            <version>3.0.30</version>
         </dependency>
         <dependency>
             <groupId>com.orientechnologies</groupId>
             <artifactId>orientdb-core</artifactId>
-            <version>3.0.4</version>
+            <version>3.0.30</version>
         </dependency>
         <dependency>
             <groupId>com.orientechnologies</groupId>
             <artifactId>orientdb-client</artifactId>
-            <version>3.0.4</version>
+            <version>3.0.30</version>
         </dependency>
     </dependencies>
 
