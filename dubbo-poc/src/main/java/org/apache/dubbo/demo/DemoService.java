@@ -1,7 +1,9 @@
 package org.apache.dubbo.demo;
 
-public interface DemoService {
-    String sayHello(String name);
+import javax.validation.constraints.NotNull;
 
-    String sayHello(String name, int sleepMillis);
+public interface DemoService {
+    String sayHello(@NotNull String name);
+
+    String sayHello(@NotNull String name, int sleepMillis);
 }
