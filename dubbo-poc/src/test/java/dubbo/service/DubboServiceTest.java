@@ -4,6 +4,7 @@ package dubbo.service;
 import org.junit.Test;
 
 import static dubbo.ConsumerLauncher.consumer;
+import static dubbo.ProviderLauncher.block;
 import static dubbo.ProviderLauncher.provider;
 
 public class DubboServiceTest {
@@ -22,11 +23,14 @@ public class DubboServiceTest {
     }
 
     @Test
-    public void testDubboServiceTimeout() {
-        provider(
-                "dubbo/service/timeout/provider.xml");
-        consumer("dubbo/service/timeout/consumer.xml");
+    public void testDubboServiceTimeout4Provider() {
+        provider("dubbo/service/timeout/provider.xml");
+        block();
     }
 
+    @Test(timeout = 4000)
+    public void testDubboServiceTimeout4Consumer() {
+        consumer("dubbo/service/timeout/consumer.xml", 500);
+    }
 
 }

@@ -13,10 +13,14 @@ public class ConsumerLauncher {
     private static Logger LOG = LoggerFactory.getLogger(ConsumerLauncher.class);
 
     public static void consumer(String consumerXml) {
-        consumer(consumerXml, 1);
+        consumer(consumerXml, 0);
     }
 
-    public static void consumer(String consumerXml, int count) {
+    public static void consumer(String consumerXml, int serverProcessMillis) {
+        consumer(consumerXml, 1, serverProcessMillis);
+    }
+
+    public static void consumer(String consumerXml, int count, final int serverProcessMillis) {
         ExecutorService es = Executors.newFixedThreadPool(count);
         final CountDownLatch countDownLatch = new CountDownLatch(count);
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(consumerXml);
@@ -25,7 +29,9 @@ public class ConsumerLauncher {
         for (int i = 0; i < count; i++) {
             es.submit(new Runnable() {
                 public void run() {
-                    LOG.info("client : {}", demoService.sayHello("world")); // 执行远程方法
+                    long start = System.currentTimeMillis();
+                    String result = demoService.sayHello("world", serverProcessMillis);
+                    LOG.info("client : {}, use time : {}ms", result, (System.currentTimeMillis() - start)); // 执行远程方法
                     countDownLatch.countDown();
                 }
             });
