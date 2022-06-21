@@ -42,7 +42,7 @@
     <properties>
         <orientdb-version>2.2.17</orientdb-version>
         <logback-version>1.2.3</logback-version>
-        <mysql-version>5.1.38</mysql-version>
+        <mysql-version>8.0.28</mysql-version>
         <sl4fj-version>1.7.25</sl4fj-version>
     </properties>
 
